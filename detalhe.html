@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadoshflow - Detalhes</title>
+    <style>
+:root {
+--cor-principal: #1e3a8a;   /* Azul-marinho principal elegante /
+--cor-secundaria: #0f172a;  / Azul-marinho bem escuro para títulos fortes /
+--cor-fundo: #f0f4f8;       / Cinza levemente azulado (fundo moderno e limpo) /
+--cor-card: #ffffff;        / Branco puro para os blocos /
+--cor-borda: #cbd5e1;       / Cinza suave para contornos e separações /
+--cor-vip: #d97706;         / Dourado elegante para áreas VIP /
+--cor-admin: #047857;       / Verde profissional para o painel admin */
+        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
+        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
+        .cabecalho-livro { display: flex; gap: 12px; margin-bottom: 15px; align-items: center; }
+        .capa-detalhe { width: 90px; height: 130px; background: #e2d2cc; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: var(--cor-secundaria); text-align: center; padding: 5px; }
+        .lista-capitulos { margin-top: 15px; border-top: 1px solid var(--cor-borda); padding-top: 10px; }
+        .item-capitulo { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #f2ece9; font-size: 12px; cursor: pointer; }
+        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Voltar</button>
+    <div class="cabecalho-livro">
+        <div class="capa-detalhe">Capa</div>
+        <div>
+            <h3 style="color: var(--cor-secundaria); margin: 0 0 5px 0; font-size: 15px;">Amor no Altar</h3>
+            <p style="font-size: 11px; color: var(--cor-principal); font-weight: bold; margin: 0 0 5px 0;">Por: Sara Lima</p>
+            <p style="font-size: 11px; color: #555; margin: 0;">Romance cristão emocionante.</p>
+        </div>
+    </div>
+    <div style="display: flex; gap: 8px;">
+        <button class="botao-acao" onclick="window.location.href='leitura.html'">Ler Amostra (Até Pág. 7)</button>
+        <button class="botao-acao" style="background: var(--cor-vip);" onclick="window.location.href='carteira.html'">👑 Desbloquear Completo</button>
+    </div>
+    <div class="lista-capitulos">
+        <div class="item-capitulo" onclick="window.location.href='leitura.html'">
+            <span>📖 Páginas 1 a 7 (Grátis)</span>
+            <span style="color: green; font-weight: bold;">Disponível</span>
+        </div>
+        <div class="item-capitulo" onclick="window.location.href='carteira.html'">
+            <span>🔒 Páginas 8 em diante (Completo / VIP)</span>
+            <span style="color: var(--cor-vip); font-weight: bold;">Assinar / Comprar</span>
+        </div>
+    </div>
+</div>
+</body>
+</html>

@@ -3,117 +3,60 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal da Criadora</title>
+    <title>Kadoshflow - Portal Cristão</title>
     <style>
+       :root {
+--cor-principal: #1e3a8a;   /* Azul-marinho principal elegante /
+--cor-secundaria: #0f172a;  / Azul-marinho bem escuro para títulos fortes /
+--cor-fundo: #f0f4f8;       / Cinza levemente azulado (fundo moderno e limpo) /
+--cor-card: #ffffff;        / Branco puro para os blocos /
+--cor-borda: #cbd5e1;       / Cinza suave para contornos e separações /
+--cor-vip: #d97706;         / Dourado elegante para áreas VIP /
+--cor-admin: #047857;       / Verde profissional para o painel admin */
+}
         body {
             font-family: Arial, sans-serif;
-            /* Fundo elegante que combina com os tons da logo */
-            background: linear-gradient(135deg, #fcf6f4 0%, #e8d7d1 100%);
+            background-color: var(--cor-fundo);
             color: #333;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 30px 20px;
-            text-align: center;
-            min-height: 100vh;
-        }
-        .container-logo {
-            background: rgba(255, 255, 255, 0.7);
-            padding: 20px;
-            border-radius: 20px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
-            display: inline-block;
-            margin-bottom: 30px;
-            backdrop-filter: blur(5px);
-        }
-        .logo-img {
-            max-width: 220px;
-            width: 100%;
-            height: auto;
-            display: block;
-            margin: 0 auto;
-            border-radius: 12px;
-        }
-        h1 {
-            color: #4a3b4c;
-            margin-bottom: 10px;
-            font-size: 24px;
-        }
-        p.sub {
-            color: #6c5b6e;
-            margin-bottom: 35px;
-            font-size: 16px;
-        }
-        .grade-apps {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
-            justify-content: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .app-card {
-            background: white;
-            padding: 20px 10px;
-            border-radius: 14px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.06);
-            text-decoration: none;
-            color: #333;
-            transition: transform 0.2s, box-shadow 0.2s;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .app-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-        }
-        .icone {
-            font-size: 32px;
-            margin-bottom: 10px;
-            background: #f7f0ed;
-            width: 60px;
-            height: 60px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-        }
-        .app-card h3 {
-            font-size: 15px;
             margin: 0;
-            color: #4a3b4c;
+            padding: 15px;
+        }
+        .app-container {
+            max-width: 500px;
+            margin: 0 auto;
+            background: var(--cor-card);
+            padding: 20px;
+            border-radius: 16px;
+            box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12);
+            border: 1px solid var(--cor-borda);
+            text-align: center;
+        }
+        #tela-splash {
+            padding: 40px 20px;
+        }
+        .botao-iniciar {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-size: 15px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-
-    <!-- Bloco da sua Logo com destaque nas cores -->
-    <div class="container-logo">
-        <img src="logo.jpg" alt="Logo da Criadora" class="logo-img">
+<div class="app-container">
+    <div id="tela-splash">
+        <!-- Cole o link da sua imagem no lugar de COLE_O_LINK_AQUI -->
+        <img src="COLE_O_LINK_AQUI" alt="Logo Kadoshflow" style="width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-vip); box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin-bottom: 15px;">
+        <h2 style="color: var(--cor-secundaria); margin-bottom: 5px;">Kadoshflow</h2>
+        <p style="color: var(--cor-principal); font-size: 13px;">Portal de Leitura, EBD e Edificação Cristã</p>
+        <button class="botao-iniciar" onclick="window.location.href='vitrine.html'">Iniciar Aplicativo</button>
     </div>
-
-    <h1>Seja muito bem-vinda(o)</h1>
-    <p class="sub">Explore os espaços criativos abaixo:</p>
-
-    <div class="grade-apps">
-        <!-- Ícone para o Devocional -->
-        <a href="devocional.html" class="app-card">
-            <div class="icone">📖</div>
-            <h3>Devocional</h3>
-        </a>
-
-        <!-- Ícone para o Mural da Criadora -->
-        <a href="mural.html" class="app-card">
-            <div class="icone">💬</div>
-            <h3>Mural de Avisos</h3>
-        </a>
-
-        <!-- Ícone para a Vitrine de Vendas -->
-        <a href="vitrine.html" class="app-card">
-            <div class="icone">🛍️</div>
-            <h3>Vitrine & E-books</h3>
-        </a>
-    </div>
-
+</div>
 </body>
 </html>
+

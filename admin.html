@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadoshflow - Painel Admin</title>
+    <style>
+        :root {
+            --cor-principal: #8c6d78;
+            --cor-secundaria: #5a4a53;
+            --cor-fundo: #fbf8f6;
+            --cor-card: #ffffff;
+            --cor-borda: #e8d7d1;
+            --cor-admin: #155724;
+        }
+        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
+        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
+        .card-admin { background: #fbf8f6; padding: 12px; border-radius: 8px; border: 1px solid var(--cor-borda); margin-bottom: 10px; }
+        .input-admin { width: 100%; padding: 6px; margin: 4px 0 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 12px; }
+        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Sair do Painel Admin</button>
+    <h3 style="color: var(--cor-admin); margin-top: 0; font-size: 15px;">🔒 Painel de Controle da Gestora (Admin)</h3>
+    <p style="font-size: 11px; color: #666;">Aqui você altera valores, gerencia contas e aprova/recusa obras.</p>
+    
+    <div class="card-admin">
+        <strong>⚙️ Alterar Valores de Venda / VIP</strong>
+        <label style="font-size: 11px; display:block; margin-top:6px;">Preço do Plano VIP Mensal (R$):</label>
+        <input type="text" class="input-admin" value="19,90">
+        <label style="font-size: 11px; display:block;">Preço Padrão Livro Avulso (R$):</label>
+        <input type="text" class="input-admin" value="14,90">
+        <button class="botao-acao" style="background: var(--cor-admin);" onclick="alert('Valores atualizados com sucesso no sistema!')">💾 Salvar Novos Valores</button>
+    </div>
+
+    <div class="card-admin">
+        <strong>✍️ Obras Enviadas por Escritores (Aprovação)</strong>
+        <p style="font-size: 11px; color: #555; margin: 4px 0;">Obra: "Caminho de Luz" (Por Autor Parceiro)</p>
+        <div style="display: flex; gap: 6px; margin-top: 6px;">
+            <button class="botao-acao" style="background: #2e7d32;" onclick="alert('Obra aprovada e publicada na Vitrine!')">✔️ Aceitar e Publicar</button>
+            <button class="botao-acao" style="background: #c62828;" onclick="alert('Obra recusada.')">❌ Recusar</button>
+        </div>
+    </div>
+</div>
+</body>
+</html>

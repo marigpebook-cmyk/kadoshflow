@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadoshflow - Leitura</title>
+    <style>
+        :root {
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-fundo: #f0f4f8;
+            --cor-card: #ffffff;
+            --cor-texto: #333333;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            margin: 0;
+            padding: 0;
+            transition: background 0.3s, color 0.3s;
+        }
+
+        /* Temas de Leitura */
+        body.tema-claro {
+            --cor-fundo: #ffffff;
+            --cor-texto: #111111;
+            --cor-card: #f9fafb;
+        }
+
+        body.tema-escuro {
+            --cor-fundo: #121212;
+            --cor-texto: #e0e0e0;
+            --cor-card: #1e1e1e;
+        }
+
+        .app-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: var(--cor-card);
+            min-height: 100vh;
+            padding: 20px;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .cabecalho-leitura {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #cbd5e1;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .botao-voltar {
+            background: none;
+            border: none;
+            color: var(--cor-principal);
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .conteudo-texto {
+            font-size: 18px;
+            line-height: 1.8;
+            text-align: justify;
+            word-break: break-word;
+        }
+
+        /* Marcador / Sublinhado interativo */
+        .sublinhado-salvo {
+            background-color: #fde047;
+            color: #000;
+            padding: 2px 4px;
+            border-radius: 3px;
+            cursor: pointer;
+        }
+
+        /* Botões Flutuantes */
+        .menu-flutuante {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%) translateY(100px);
+            background-color: var(--cor-secundaria);
+            color: #fff;
+            padding: 12px 20px;
+            border-radius: 30px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .menu-flutuante.ativo {
+            transform: translateX(-50%) translateY(0);
+        }
+
+        .menu-flutuante button {
+            background: rgba(255,255,255,0.15);
+            border: none;
+            color: #fff;
+            padding: 8px 12px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+
+        .menu-flutuante button:hover {
+            background: rgba(255,255,255,0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="app-container" id="appContainer">
+        <div class="cabecalho-leitura">
+            <button class="botao-voltar" onclick="window.location.href='detalhe.html'">← Voltar</button>
+            <span style="font-size: 14px; opacity: 0.8;">Capítulo 1</span>
+        </div>
+
+        <div class="conteudo-texto" id="textoLeitura">
+            <p>Caminhando pela fé e não por vista, ela avançava pelas páginas da sua história. Cada linha representava um novo passo em direção ao propósito estabelecido.</p>
+            <p>Toque em qualquer parte desta tela para abrir os controles de leitura flutuantes. Você pode alternar entre o modo claro e escuro, ajustar o tamanho das letras e marcar trechos importantes.</p>
+            <p id="paragrafoMarcador">Toque duas vezes neste parágrafo para destacá-lo como o seu último ponto de leitura ou marcador.</p>
+        </div>
+    </div>
+
+    <!-- Barra de Botões Flutuantes -->
+    <div class="menu-flutuante" id="menuFlutuante">
+        <button onclick="mudarTema()">🌓 Tema</button>
+        <button onclick="alterarFonte(1)">A+</button>
+        <button onclick="alterarFonte(-1)">A-</button>
+        <button onclick="marcarTrecho()">📌 Marcar</button>
+    </div>
+
+    <script>
+        const menu = document.getElementById('menuFlutuante');
+        const container = document.getElementById('appContainer');
+        const texto = document.getElementById('textoLeitura');
+        let tamanhoFonte = 18;
+
+        // Mostrar/Ocultar menu flutuante ao tocar na tela
+        container.addEventListener('click', (e) => {
+            if(e.target.tagName === 'BUTTON') return;
+            menu.classList.toggle('ativo');
+        });
+
+        // Alternar entre modo Claro e Escuro
+        function mudarTema() {
+            if (document.body.classList.contains('tema-escuro')) {
+                document.body.classList.remove('tema-escuro');
+                document.body.classList.add('tema-claro');
+            } else if (document.body.classList.contains('tema-claro')) {
+                document.body.classList.remove('tema-claro');
+            } else {
+                document.body.classList.add('tema-escuro');
+            }
+        }
+
+        // Aumentar ou diminuir o tamanho da letra
+        function alterarFonte(direcao) {
+            tamanhoFonte += direcao * 2;
+            if(tamanhoFonte < 14) tamanhoFonte = 14;
+            if(tamanhoFonte > 28) tamanhoFonte = 28;
+            texto.style.fontSize = tamanhoFonte + 'px';
+        }
+
+        // Marcar/Sublinhar o trecho onde parou
+        function marcarTrecho() {
+            const p = document.getElementById('paragrafoMarcador');
+            p.classList.toggle('sublinhado-salvo');
+            alert('Marcador de página atualizado com sucesso!');
+        }
+    </script>
+</body>
+</html>

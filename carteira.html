@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadoshflow - VIP e Carteira</title>
+    <style>
+        :root {
+            --cor-principal: #8c6d78;
+            --cor-secundaria: #5a4a53;
+            --cor-fundo: #fbf8f6;
+            --cor-card: #ffffff;
+            --cor-borda: #e8d7d1;
+            --cor-vip: #c5a880;
+        }
+        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
+        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
+        .card-pagamento { background: #fbf8f6; padding: 12px; border-radius: 8px; border: 1px solid var(--cor-borda); margin-bottom: 10px; }
+        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
+        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+    </style>
+</head>
+<body>
+<div class="app-container">
+    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Voltar à Vitrine</button>
+    <h3 style="color: var(--cor-secundaria); margin-top: 0; font-size: 15px;">👑 Área VIP & Carteira</h3>
+    <div class="card-pagamento">
+        <strong>Plano Membro VIP Cristão (Mensal)</strong>
+        <p style="font-size: 11px; color: #555; margin: 4px 0;">Acesso liberado a todos os livros e EBD.</p>
+        <button class="botao-acao" style="background: var(--cor-vip);" onclick="alert('Gerando QR Code PIX...')">⚡ Pagar com PIX</button>
+        <button class="botao-acao" style="margin-top: 5px;" onclick="alert('Abrindo tela de Cartão...')">💳 Pagar com Cartão</button>
+    </div>
+</div>
+</body>
+</html>
