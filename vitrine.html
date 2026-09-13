@@ -6,132 +6,223 @@
     <title>Kadoshflow - Vitrine</title>
     <style>
         :root {
-    --cor-principal: #1e3a8a;   /* Azul-marinho principal elegante */
-    --cor-secundaria: #0f172a;  /* Azul-marinho bem escuro para títulos fortes */
-    --cor-fundo: #f0f4f8;       /* Cinza levemente azulado (fundo moderno e limpo) */
-    --cor-card: #ffffff;        /* Branco puro para os blocos */
-    --cor-borda: #cbd5e1;       /* Cinza suave para contornos e separações */
-    --cor-vip: #d97706;         /* Dourado elegante para áreas VIP */
-    --cor-admin: #047857;       /* Verde profissional para o painel admin */
-}
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-fundo: #f0f4f8;
+            --cor-card: #ffffff;
+            --cor-borda: #cbd5e1;
+        }
 
-        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
-        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
-        .topo-vitrine { display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid var(--cor-borda); padding-bottom: 10px; margin-bottom: 15px; }
-        .icone-perfil { background: var(--cor-borda); color: var(--cor-secundaria); border: none; width: 35px; height: 35px; border-radius: 50%; font-size: 16px; cursor: pointer; }
-        .abas-superiores { display: flex; gap: 8px; overflow-x: auto; padding-bottom: 8px; margin-bottom: 15px; border-bottom: 1px solid var(--cor-borda); }
-        .aba-chip { background: #fbf8f6; border: 1px solid var(--cor-borda); padding: 6px 14px; border-radius: 20px; font-size: 12px; font-weight: bold; color: var(--cor-secundaria); cursor: pointer; white-space: nowrap; }
-        .aba-chip.ativa { background-color: var(--cor-principal); color: white; border-color: var(--cor-principal); }
-        .secao-conteudo { display: none; }
-        .secao-conteudo.ativa { display: block; }
-        .grid-galeria { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
-        .card-obra { background: #fbf8f6; padding: 10px; border-radius: 10px; border: 1px solid var(--cor-borda); }
-        .capa-placeholder { width: 100%; height: 110px; background: #e2d2cc; border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 11px; color: var(--cor-secundaria); font-weight: bold; margin-bottom: 6px; text-align: center; padding: 5px; }
-        .link-autor { font-size: 11px; color: var(--cor-principal); font-weight: bold; cursor: pointer; text-decoration: underline; }
-        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
-        .rodape-navegacao { display: flex; justify-content: space-around; border-top: 2px solid var(--cor-borda); padding-top: 10px; margin-top: 20px; font-size: 12px; color: var(--cor-secundaria); font-weight: bold; background: #fbf8f6; margin-left: -20px; margin-right: -20px; margin-bottom: -20px; padding-bottom: 12px; border-radius: 0 0 16px 16px; }
-        .nav-item { cursor: pointer; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        /* Moldura principal que se adapta: tela cheia em celulares, mas elegante em tablets/notebooks */
+        .app-container {
+            width: 100%;
+            max-width: 900px; /* Aumentado para aproveitar melhor telas maiores */
+            background-color: var(--cor-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .conteudo-principal {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .topo-vitrine {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--cor-borda);
+            padding-bottom: 15px;
+        }
+
+        .topo-vitrine h2 {
+            color: var(--cor-principal);
+            font-size: 22px;
+        }
+
+        /* Categorias / Filtros */
+        .categorias {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .categoria-btn {
+            background-color: var(--cor-fundo);
+            border: 1px solid var(--cor-borda);
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 14px;
+            cursor: pointer;
+            white-space: nowrap;
+            color: var(--cor-secundaria);
+            font-weight: bold;
+        }
+
+        .categoria-btn.ativo {
+            background-color: var(--cor-principal);
+            color: white;
+            border-color: var(--cor-principal);
+        }
+
+        /* Seção de Destaques e Livros */
+        .secao-titulo {
+            font-size: 18px;
+            color: var(--cor-secundaria);
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .grid-livros {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+            gap: 15px;
+        }
+
+        .card-livro {
+            background-color: var(--cor-fundo);
+            border: 1px solid var(--cor-borda);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .capa-livro {
+            width: 100%;
+            height: 140px;
+            background-color: #cbd5e1;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #64748b;
+            font-weight: bold;
+            margin-bottom: 12px;
+        }
+
+        .livro-info h3 {
+            font-size: 16px;
+            color: var(--cor-secundaria);
+            margin-bottom: 5px;
+        }
+
+        .livro-info p {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 12px;
+        }
+
+        .botao-ler {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            text-align: center;
+        }
+
+        .botao-ler:hover {
+            opacity: 0.9;
+        }
+
+        /* Menu Inferior Fixo */
+        .menu-inferior {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ffffff;
+            border-top: 1px solid var(--cor-borda);
+            padding: 12px 0;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .menu-item {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 13px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .menu-item.ativo {
+            color: var(--cor-principal);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <div class="topo-vitrine">
-        <h3 style="color: var(--cor-secundaria); margin: 0;">Kadoshflow</h3>
-        <button class="icone-perfil" onclick="abrirPerfil()">👤</button>
-    </div>
 
-    <div class="abas-superiores">
-        <button class="aba-chip ativa" onclick="mudarAba('hot', this)">🔥 HOT</button>
-        <button class="aba-chip" onclick="mudarAba('rank', this)">⭐ RANK</button>
-        <button class="aba-chip" onclick="mudarAba('livros', this)">📖 Livros</button>
-        <button class="aba-chip" onclick="mudarAba('infantil', this)">🎨 Infantil</button>
-        <button class="aba-chip" onclick="mudarAba('ebd', this)">📚 EBD</button>
-        <button class="aba-chip" onclick="window.location.href='carteira.html'" style="background: var(--cor-vip); color: white;">👑 VIP / Carteira</button>
-    </div>
-
-    <div id="secao-hot" class="secao-conteudo ativa">
-        <h4 style="color: var(--cor-secundaria); margin-top: 0;">🔥 Destaques</h4>
-        <div class="grid-galeria">
-            <div class="card-obra">
-                <div class="capa-placeholder">Amor no Altar</div>
-                <strong style="font-size: 12px;">Amor no Altar</strong>
-                <div><span class="link-autor" onclick="alert('Perfil da Autora Sara Lima')">Por Sara Lima</span></div>
-                <button class="botao-acao" onclick="window.location.href='detalhes.html'">Ler Obra</button>
+    <div class="app-container">
+        <div class="conteudo-principal">
+            <!-- Topo -->
+            <div class="topo-vitrine">
+                <h2>Kadoshflow</h2>
+                <button onclick="window.location.href='admin.html'" style="background:none; border:none; cursor:pointer; font-size: 20px;" title="Perfil / Admin">👤</button>
             </div>
+
+            <!-- Abas de Categorias -->
+            <div class="categorias">
+                <button class="categoria-btn ativo">🔥 HOT</button>
+                <button class="categoria-btn">⭐ RANK</button>
+                <button class="categoria-btn">📚 Livros</button>
+                <button class="categoria-btn">👶 Infantil</button>
+                <button class="categoria-btn">📖 EBD</button>
+                <button class="categoria-btn">👑 VIP / Completo</button>
+            </div>
+
+            <!-- Destaques -->
+            <div class="secao-titulo">🔥 Destaques</div>
+            
+            <div class="grid-livros">
+                <div class="card-livro">
+                    <div class="capa-livro">Capa do Livro</div>
+                    <div class="livro-info">
+                        <h3>Amor no Altar</h3>
+                        <p>Por Sara Lima</p>
+                    </div>
+                    <button class="botao-ler" onclick="window.location.href='detalhe.html'">Ler Obra</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu de Navegação Inferior -->
+        <div class="menu-inferior">
+            <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
+            <button class="menu-item ativo" onclick="window.location.href='vitrine.html'">🏠 Início</button>
+            <button class="menu-item" onclick="window.location.href='detalhe.html'">👑 VIP</button>
+            <button class="menu-item" onclick="window.location.href='admin.html'">👤 Perfil</button>
         </div>
     </div>
 
-    <div id="secao-rank" class="secao-conteudo">
-        <h4 style="color: var(--cor-secundaria); margin-top: 0;">⭐ Top Mais Lidos</h4>
-        <div class="grid-galeria">
-            <div class="card-obra">
-                <div class="capa-placeholder">Estudo Bíblico</div>
-                <strong style="font-size: 12px;">Estudo Profundo</strong>
-                <div><span class="link-autor" onclick="alert('Perfil do Pr. Carlos')">Por Pr. Carlos</span></div>
-                <button class="botao-acao" onclick="window.location.href='detalhes.html'">Ler Obra</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="secao-livros" class="secao-conteudo">
-        <h4 style="color: var(--cor-secundaria); margin-top: 0;">📖 Livros Cristãos</h4>
-        <div class="grid-galeria">
-            <div class="card-obra">
-                <div class="capa-placeholder">Cartas de Paulo</div>
-                <strong style="font-size: 12px;">Cartas de Paulo</strong>
-                <div><span class="link-autor" onclick="alert('Perfil de Maryg')">Por Maryg</span></div>
-                <button class="botao-acao" onclick="window.location.href='detalhes.html'">Ler Obra</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="secao-infantil" class="secao-conteudo">
-        <h4 style="color: var(--cor-secundaria); margin-top: 0;">🎨 Atividades Infantis</h4>
-        <div class="grid-galeria">
-            <div class="card-obra">
-                <div class="capa-placeholder">Colorindo a Bíblia</div>
-                <strong style="font-size: 12px;">Colorindo a Bíblia</strong>
-                <div><span class="link-autor" onclick="alert('Equipe Infantil')">Por Equipe</span></div>
-                <button class="botao-acao" onclick="window.location.href='detalhes.html'">Ver PDF</button>
-            </div>
-        </div>
-    </div>
-
-    <div id="secao-ebd" class="secao-conteudo">
-        <h4 style="color: var(--cor-secundaria); margin-top: 0;">📚 Aulas EBD</h4>
-        <div class="grid-galeria">
-            <div class="card-obra">
-                <div class="capa-placeholder">Fé em Ação</div>
-                <strong style="font-size: 12px;">Lição EBD</strong>
-                <div><span class="link-autor" onclick="alert('Coordenação')">Por Coordenação</span></div>
-                <button class="botao-acao" onclick="window.location.href='detalhes.html'">Ver Material</button>
-            </div>
-        </div>
-    </div>
-
-    <div class="rodape-navegacao">
-        <div class="nav-item" onclick="alert('Biblioteca Pessoal')">📖 Biblioteca</div>
-        <div class="nav-item" onclick="window.location.href='vitrine.html'">🏠 Início</div>
-        <div class="nav-item" onclick="window.location.href='carteira.html'">👑 VIP</div>
-        <div class="nav-item" onclick="abrirPerfil()">👤 Perfil</div>
-    </div>
-</div>
-
-<script>
-    function mudarAba(nome, el) {
-        document.querySelectorAll('.secao-conteudo').forEach(s => s.style.display = 'none');
-        document.querySelectorAll('.aba-chip').forEach(c => c.classList.remove('ativa'));
-        document.getElementById('secao-' + nome).style.display = 'block';
-        if(el) el.classList.add('ativa');
-    }
-    function abrirPerfil() {
-        let senha = prompt("Digite a senha de Gestora (Admin):");
-        if(senha === "1234") {
-            window.location.href = 'admin.html';
-        } else if(senha !== null) {
-            alert("Senha incorreta!");
-        }
-    }
-</script>
 </body>
 </html>
