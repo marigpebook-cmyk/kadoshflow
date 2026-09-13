@@ -6,13 +6,12 @@
     <title>Kadoshflow - Meu Perfil</title>
     <style>
         :root {
-            --cor-principal: #1e3a8a; /* Azul Escuro */
+            --cor-principal: #1e3a8a;
             --cor-secundaria: #0f172a;
             --cor-adm: #b91c1c;
-            --cor-fundo: #f0fdf4; /* Verde-água bem clarinho / Pastel */
+            --cor-fundo: #f0fdf4;
             --cor-card: #ffffff;
             --cor-borda: #ccfbf1;
-            --cor-destaque: #0284c7; /* Azul Bebê / Vívido */
         }
 
         * {
@@ -48,7 +47,6 @@
             padding-bottom: 40px;
         }
 
-        /* Topo com Configurações e Mensagens Funcionais */
         .topo-botoes {
             display: flex;
             justify-content: flex-end;
@@ -60,25 +58,13 @@
         .topo-botoes span {
             cursor: pointer;
             padding: 5px;
-            border-radius: 50%;
-            transition: background 0.2s;
         }
 
-        .topo-botoes span:hover {
-            background-color: #e2e8f0;
-        }
-
-        /* Perfil do Usuário com Upload de Foto */
         .perfil-topo {
             display: flex;
             align-items: center;
             gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .foto-avatar-container {
-            position: relative;
-            cursor: pointer;
+            margin-bottom: 15px;
         }
 
         .foto-avatar {
@@ -92,29 +78,14 @@
             justify-content: center;
             font-size: 26px;
             font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
             background-size: cover;
             background-position: center;
-        }
-
-        .badge-foto {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: var(--cor-principal);
-            color: white;
-            font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 10px;
-            border: 2px solid white;
+            cursor: pointer;
         }
 
         .info-usuario h3 {
             font-size: 18px;
             color: var(--cor-secundaria);
-            display: flex;
-            align-items: center;
-            gap: 8px;
         }
 
         .tag-pseudonimo {
@@ -126,13 +97,26 @@
             font-weight: bold;
         }
 
-        .info-usuario p {
-            font-size: 13px;
-            color: #64748b;
-            margin-top: 3px;
+        /* Amigos, Seguidores e Seguindo posicionados perto do nome */
+        .amigos-seguidores-bar {
+            display: flex;
+            gap: 15px;
+            font-size: 12px;
+            color: #475569;
+            margin-bottom: 20px;
+            background: #f8fafc;
+            padding: 10px;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            justify-content: space-around;
         }
 
-        /* Estatísticas */
+        .amigos-seguidores-bar span {
+            cursor: pointer;
+            font-weight: bold;
+            color: var(--cor-principal);
+        }
+
         .estatisticas-box {
             display: flex;
             justify-content: space-around;
@@ -156,7 +140,6 @@
             color: #64748b;
         }
 
-        /* Bloco da Carteira com tom Pastel/Dourado suave */
         .carteira-card {
             background: linear-gradient(135deg, #fef3c7, #fde68a);
             border: 1px solid #fcd34d;
@@ -173,41 +156,12 @@
             margin-bottom: 12px;
         }
 
-        .carteira-topo span {
-            font-weight: bold;
-            color: #92400e;
-            font-size: 14px;
-        }
-
-        .btn-recarregar {
-            background-color: #d97706;
-            color: white;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
         .carteira-valores {
             display: flex;
             justify-content: space-around;
             text-align: center;
         }
 
-        .valor-item b {
-            font-size: 16px;
-            color: #78350f;
-            display: block;
-        }
-
-        .valor-item span {
-            font-size: 11px;
-            color: #92400e;
-        }
-
-        /* Lista de Opções do Menu */
         .menu-opcoes {
             display: flex;
             flex-direction: column;
@@ -224,9 +178,7 @@
             font-size: 14px;
             color: var(--cor-secundaria);
             background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
+            border: none;
             width: 100%;
             text-align: left;
         }
@@ -236,13 +188,6 @@
             border-radius: 8px;
         }
 
-        .opcao-item span {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Modal genérico */
         .modal-padrao {
             position: fixed;
             top: 0;
@@ -267,11 +212,6 @@
             overflow-y: auto;
         }
 
-        .modal-conteudo h3 {
-            color: var(--cor-principal);
-            margin-bottom: 15px;
-        }
-
         .form-grupo {
             margin-bottom: 12px;
         }
@@ -292,29 +232,6 @@
             font-size: 13px;
         }
 
-        /* Painel Admin Vermelho */
-        .btn-admin-secreto {
-            background: none;
-            border: none;
-            color: var(--cor-adm);
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 30px;
-            width: 100%;
-            text-align: center;
-            font-weight: bold;
-        }
-
-        .painel-adm {
-            background-color: #fef2f2;
-            border: 2px solid var(--cor-adm);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none;
-        }
-
-        /* Menu Inferior Fixo */
         .menu-inferior {
             display: flex;
             justify-content: space-around;
@@ -351,99 +268,55 @@
             <!-- Topo com Mensagens e Configurações Funcionais -->
             <div class="topo-botoes">
                 <span title="Mensagens" onclick="abrirMensagens()">✉️</span>
-                <span title="Configurações e Idioma" onclick="abrirConfiguracoes()">⚙️</span>
+                <span title="Configurações" onclick="abrirConfiguracoes()">⚙️</span>
             </div>
 
-            <!-- Perfil do Usuário com Foto da Galeria -->
+            <!-- Perfil do Usuário -->
             <div class="perfil-topo">
-                <div class="foto-avatar-container" onclick="document.getElementById('inputFotoGaleria').click()" title="Alterar foto de perfil">
-                    <div class="foto-avatar" id="avatarDiv">M</div>
-                    <div class="badge-foto">📷</div>
-                    <input type="file" id="inputFotoGaleria" accept="image/*" style="display: none;" onchange="carregarFotoGaleria(event)">
-                </div>
+                <div class="foto-avatar" id="avatarDiv" onclick="document.getElementById('inputFoto').click()">M</div>
+                <input type="file" id="inputFoto" accept="image/*" style="display:none;" onchange="mudarFoto(event)">
                 <div class="info-usuario">
                     <h3 id="nomeUsuario">Marilan <span class="tag-pseudonimo">MaryG</span></h3>
-                    <p id="emailUsuario">carregando...</p>
+                    <p id="emailUsuario" style="font-size: 12px; color: #64748b;">carregando...</p>
                 </div>
+            </div>
+
+            <!-- Barra de Amigos e Seguidores no Topo -->
+            <div class="amigos-seguidores-bar">
+                <div onclick="alert('Lista de Seguidores')">Seguidores: <span id="numSeguidores">12</span></div>
+                <div onclick="alert('Lista de Amigos Conectados')">Amigos: <span id="numAmigos">5</span></div>
+                <div onclick="alert('Pessoas que você está seguindo')">Seguindo: <span id="numSeguindo">8</span></div>
             </div>
 
             <!-- Estatísticas -->
             <div class="estatisticas-box">
-                <div class="estat-item">
-                    <span>12</span>
-                    <label>Seguidores</label>
-                </div>
-                <div class="estat-item">
-                    <span>48</span>
-                    <label>Curtidas</label>
-                </div>
-                <div class="estat-item">
-                    <span>156</span>
-                    <label>Visitantes</label>
-                </div>
+                <div class="estat-item"><span>12</span><label>Seguidores</label></div>
+                <div class="estat-item"><span>48</span><label>Curtidas</label></div>
+                <div class="estat-item"><span>156</span><label>Visitantes</label></div>
             </div>
 
-            <!-- Seção da Carteira (Moedas e Estrelas) -->
+            <!-- Carteira -->
             <div class="carteira-card">
                 <div class="carteira-topo">
-                    <span>CARTEIRA KADOSH</span>
-                    <button class="btn-recarregar" onclick="alert('Recarga de créditos em desenvolvimento.')">Recarregar</button>
+                    <span style="font-weight:bold; color:#92400e;">CARTEIRA KADOSH</span>
                 </div>
                 <div class="carteira-valores">
-                    <div class="valor-item">
-                        <b>💵 0</b>
-                        <span>Moedas</span>
-                    </div>
-                    <div class="valor-item">
-                        <b>🎁 0</b>
-                        <span>Bônus</span>
-                    </div>
-                    <div class="valor-item">
-                        <b>⭐ 10</b>
-                        <span>Estrelas</span>
-                    </div>
+                    <div class="valor-item"><b>💵 0</b><span>Moedas</span></div>
+                    <div class="valor-item"><b>🎁 0</b><span>Bônus</span></div>
+                    <div class="valor-item"><b>⭐ 10</b><span>Estrelas</span></div>
                 </div>
             </div>
 
-            <!-- Menu de Opções Personalizadas -->
+            <!-- Menu de Opções -->
             <div class="menu-opcoes">
-                <button class="opcao-item" onclick="abrirInscricaoEscritor()">
-                    <span>✍️ Ser um Escritor Kadosh</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Seus cartões premiados e cupons ativos.')">
-                    <span>🎟️ Cartão Premiado / Cupons</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Resgate de estrelas adquiridas na plataforma.')">
-                    <span>⭐ Código de Resgate / Estrelas</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Lista de amigos e escritores que você segue.')">
-                    <span>👥 Seguindo & Amigos</span> ➔
-                </button>
-                <button class="opcao-item" onclick="window.location.href='carteira.html'">
-                    <span>📚 Minhas Compras Kadosh</span> ➔
-                </button>
-                <button class="opcao-item" onclick="abrirSuporte()">
-                    <span>💬 Tirar suas Dúvidas (Suporte)</span> ➔
-                </button>
-                <button class="opcao-item" onclick="abrirConfiguracoes()">
-                    <span>🌐 Língua & Preferência</span> ➔
-                </button>
+                <button class="opcao-item" onclick="abrirModal('modalEscritor')"><span>✍️ Ser um Escritor Kadosh</span> ➔</button>
+                <button class="opcao-item" onclick="alert('Cartão premiado e cupons ativos.')"><span>🎟️ Cartão Premiado / Cupons</span> ➔</button>
+                <button class="opcao-item" onclick="window.location.href='carteira.html'"><span>📚 Minhas Compras Kadosh</span> ➔</button>
+                <button class="opcao-item" onclick="abrirModal('modalSuporte')"><span>💬 Tirar suas Dúvidas (Suporte)</span> ➔</button>
+                <button class="opcao-item" onclick="abrirModal('modalConfig')"><span>🌐 Língua & Preferência</span> ➔</button>
             </div>
-
-            <!-- Painel Admin Vermelho -->
-            <button class="btn-admin-secreto" onclick="acessarAdminVermelho()">🔒 Painel Exclusivo da Gestora (Admin)</button>
-
-            <div class="painel-adm" id="painelVermelho">
-                <h4 style="color: var(--cor-adm); margin-bottom: 10px;">🔴 Painel de Gestão Kadoshflow</h4>
-                <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 10px;">Apenas obras originais. Divisão de percentual com autores parceiros.</p>
-                <label style="font-size: 12px; font-weight: bold;">Valor Assinatura VIP (Master):</label>
-                <input type="text" value="R$ 16,00" style="width:100%; padding:8px; margin-top:4px; border:1px solid #fca5a5; border-radius:5px;">
-                <button onclick="alert('Alterações salvas com sucesso!')" style="background:var(--cor-adm); color:white; border:none; padding:8px 15px; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer;">Salvar</button>
-            </div>
-
         </div>
 
-        <!-- Menu de Navegação Inferior -->
         <div class="menu-inferior">
             <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
             <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
@@ -452,104 +325,74 @@
         </div>
     </div>
 
-    <!-- MODAL: INSCRIÇÃO ESCRITOR KADOSH (GRÁTIS COM PORCENTAGEM) -->
-    <div class="modal-padrao" id="modalEscritor">
-        <div class="modal-conteudo">
-            <h3>Ser um Escritor Kadosh</h3>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">A inscrição é <b>totalmente grátis</b>! Suas obras originais serão publicadas e você receberá um adicional (porcentagem de vendas) negociado pela plataforma.</p>
-            
-            <div class="form-grupo">
-                <label>Nome Completo</label>
-                <input type="text" placeholder="Seu nome">
-            </div>
-            <div class="form-grupo">
-                <label>Pseudônimo (Nome de Escritor)</label>
-                <input type="text" placeholder="Ex: MaryG">
-            </div>
-            <div class="form-grupo">
-                <label>E-mail</label>
-                <input type="email" id="emailEscritorInput">
-            </div>
-            <div class="form-grupo">
-                <label>CPF</label>
-                <input type="text" placeholder="000.000.000-00">
-            </div>
-            <div class="form-grupo">
-                <label>Documento com Foto (RG/CNH)</label>
-                <input type="file" accept="image/*">
-            </div>
-
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <button onclick="enviarInscricaoEscritor()" style="flex:1; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Concluir Inscrição</button>
-                <button onclick="fecharModal('modalEscritor')" style="background:#cbd5e1; border:none; padding:10px 15px; border-radius:6px; cursor:pointer;">Cancelar</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- MODAL: CONFIGURAÇÕES E IDIOMAS -->
-    <div class="modal-padrao" id="modalConfig">
-        <div class="modal-conteudo">
-            <h3>⚙️ Configurações & Idioma</h3>
-            <div class="form-grupo">
-                <label>Selecione o Idioma:</label>
-                <select id="selectIdioma">
-                    <option value="pt">Português (Brasil)</option>
-                    <option value="en">English (Inglês)</option>
-                    <option value="es">Español (Espanhol)</option>
-                    <option value="fr">Français (Francês)</option>
-                </select>
-            </div>
-            <button onclick="salvarConfiguracoes()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:10px;">Salvar Preferência</button>
-            <button onclick="fecharModal('modalConfig')" style="width:100%; background:#cbd5e1; border:none; padding:10px; border-radius:6px; cursor:pointer; margin-top:8px;">Fechar</button>
-        </div>
-    </div>
-
-    <!-- MODAL: SUPORTE / DÚVIDAS -->
+    <!-- MODAL SUPORTE -->
     <div class="modal-padrao" id="modalSuporte">
         <div class="modal-conteudo">
             <h3>💬 Tirar suas Dúvidas (Suporte)</h3>
             <p style="font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 15px;">
-                <b>• Como pagar?</b> Você pode usar PIX, Cartão ou transferência bancária na aba VIP.<br><br>
-                <b>• Ser escritor é pago?</b> Não! É 100% gratuito. Você recebe uma porcentagem sobre as vendas da sua obra.<br><br>
-                <b>• Como mudar o idioma?</b> Clique no ícone de engrenagem no topo da página de perfil.
+                <b>• Como pagar?</b> Acesse a aba VIP e escolha seu banco ou PIX.<br><br>
+                <b>• Ser escritor é pago?</b> Não! É 100% gratuito e você recebe uma porcentagem sobre suas obras originais.<br><br>
+                <b>• Idioma:</b> Você pode alterar nas configurações de preferência.
             </p>
-            <button onclick="fecharModal('modalSuporte')" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Entendido</button>
+            <button onclick="fecharModais()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Entendido</button>
+        </div>
+    </div>
+
+    <!-- MODAL CONFIG -->
+    <div class="modal-padrao" id="modalConfig">
+        <div class="modal-conteudo">
+            <h3>⚙️ Língua & Preferência</h3>
+            <div class="form-grupo">
+                <label>Idioma:</label>
+                <select>
+                    <option>Português (Brasil)</option>
+                    <option>English</option>
+                    <option>Español</option>
+                    <option>Français</option>
+                </select>
+            </div>
+            <button onclick="fecharModais()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Salvar</button>
+        </div>
+    </div>
+
+    <!-- MODAL ESCRITOR -->
+    <div class="modal-padrao" id="modalEscritor">
+        <div class="modal-conteudo">
+            <h3>Ser um Escritor Kadosh</h3>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Inscrição 100% grátis para publicação de obras originais.</p>
+            <div class="form-grupo"><label>Nome Completo</label><input type="text"></div>
+            <div class="form-grupo"><label>Pseudônimo</label><input type="text" value="MaryG"></div>
+            <button onclick="alert('Inscrição enviada com sucesso!'); fecharModais();" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Enviar</button>
         </div>
     </div>
 
     <script>
         window.onload = function() {
-            const emailSalvo = localStorage.getItem('kadoshflow_email');
-            if(emailSalvo) {
-                document.getElementById('emailUsuario').textContent = emailSalvo;
-                const inicial = emailSalvo.charAt(0).toUpperCase();
-                document.getElementById('avatarDiv').textContent = inicial;
-                document.getElementById('nomeUsuario').innerHTML = emailSalvo.split('@')[0] + ' <span class="tag-pseudonimo">MaryG</span>';
-                document.getElementById('emailEscritorInput').value = emailSalvo;
+            const email = localStorage.getItem('kadoshflow_email');
+            if(email) {
+                document.getElementById('emailUsuario').textContent = email;
+                document.getElementById('avatarDiv').textContent = email.charAt(0).toUpperCase();
+            } else {
+                document.getElementById('emailUsuario').textContent = "visitante@kadoshflow.com";
             }
         };
 
-        // Carregar foto da galeria
-        function carregarFotoGaleria(event) {
-            const arquivo = event.target.files[0];
-            if (arquivo) {
-                const leitor = new FileReader();
-                leitor.onload = function(e) {
-                    const avatarDiv = document.getElementById('avatarDiv');
-                    avatarDiv.textContent = "";
-                    avatarDiv.style.backgroundImage = `url('${e.target.result}')`;
+        function mudarFoto(event) {
+            const file = event.target.files[0];
+            if(file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const avatar = document.getElementById('avatarDiv');
+                    avatar.textContent = "";
+                    avatar.style.backgroundImage = `url('${e.target.result}')`;
                 }
-                leitor.readAsDataURL(arquivo);
+                reader.readAsDataURL(file);
             }
         }
 
-        // Funções de Modais
-        function abrirInscricaoEscritor() { document.getElementById('modalEscritor').style.display = 'flex'; }
-        function abrirConfiguracoes() { document.getElementById('modalConfig').style.display = 'flex'; }
-        function abrirSuporte() { document.getElementById('modalSuporte').style.display = 'flex'; }
-        function abrirMensagens() { alert("Você não possui novas mensagens no momento."); }
-        function fecharModal(id) { document.getElementById('modalConfig').style.display = 'none'; document.getElementById('modalEscritor').style.display = 'none'; document.getElementById('modalSuporte').style.display = 'none'; }
-
-        function enviarInscricaoEscritor() {
-            alert("Inscrição para Escr
-
+        function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function fecharModais() { document.querySelectorAll('.modal-padrao').forEach(m => m.style.display = 'none'); }
+        function abrirMensagens() { alert("Caixa de mensagens vazia."); }
+    </script>
+</body>
+</html>

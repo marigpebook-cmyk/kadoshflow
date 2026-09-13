@@ -3,16 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Meu Perfil</title>
+    <title>Kadoshflow - Início</title>
     <style>
         :root {
-            --cor-principal: #1e3a8a; /* Azul Escuro */
+            --cor-principal: #1e3a8a;
             --cor-secundaria: #0f172a;
-            --cor-adm: #b91c1c;
-            --cor-fundo: #f0fdf4; /* Verde-água bem clarinho / Pastel */
-            --cor-card: #ffffff;
-            --cor-borda: #ccfbf1;
-            --cor-destaque: #0284c7; /* Azul Bebê / Vívido */
+            --cor-fundo: #ffffff;
         }
 
         * {
@@ -21,536 +17,222 @@
             padding: 0;
         }
 
-        body {
+        body, html {
+            width: 100%;
+            height: 100%;
             font-family: Arial, sans-serif;
-            background-color: var(--cor-fundo);
-            color: #333;
-            display: flex;
-            justify-content: center;
-            min-height: 100vh;
+            background-color: #0f172a;
+            overflow: hidden;
         }
 
-        .app-container {
-            width: 100%;
-            max-width: 480px;
-            background-color: var(--cor-card);
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-        }
-
-        .conteudo-principal {
-            padding: 20px;
-            flex: 1;
-            overflow-y: auto;
-            padding-bottom: 40px;
-        }
-
-        /* Topo com Configurações e Mensagens Funcionais */
-        .topo-botoes {
-            display: flex;
-            justify-content: flex-end;
-            gap: 15px;
-            margin-bottom: 15px;
-            font-size: 20px;
-        }
-
-        .topo-botoes span {
-            cursor: pointer;
-            padding: 5px;
-            border-radius: 50%;
-            transition: background 0.2s;
-        }
-
-        .topo-botoes span:hover {
-            background-color: #e2e8f0;
-        }
-
-        /* Perfil do Usuário com Upload de Foto */
-        .perfil-topo {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-        }
-
-        .foto-avatar-container {
-            position: relative;
-            cursor: pointer;
-        }
-
-        .foto-avatar {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #0284c7, #1e3a8a);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 26px;
-            font-weight: bold;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-            background-size: cover;
-            background-position: center;
-        }
-
-        .badge-foto {
-            position: absolute;
-            bottom: 0;
-            right: 0;
-            background-color: var(--cor-principal);
-            color: white;
-            font-size: 10px;
-            padding: 2px 5px;
-            border-radius: 10px;
-            border: 2px solid white;
-        }
-
-        .info-usuario h3 {
-            font-size: 18px;
-            color: var(--cor-secundaria);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .tag-pseudonimo {
-            background-color: #e0f2fe;
-            color: var(--cor-principal);
-            font-size: 11px;
-            padding: 2px 8px;
-            border-radius: 10px;
-            font-weight: bold;
-        }
-
-        .info-usuario p {
-            font-size: 13px;
-            color: #64748b;
-            margin-top: 3px;
-        }
-
-        /* Estatísticas */
-        .estatisticas-box {
-            display: flex;
-            justify-content: space-around;
-            background-color: #f8fafc;
-            border: 1px solid var(--cor-borda);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 20px;
-            text-align: center;
-        }
-
-        .estat-item span {
-            display: block;
-            font-size: 16px;
-            font-weight: bold;
-            color: var(--cor-secundaria);
-        }
-
-        .estat-item label {
-            font-size: 11px;
-            color: #64748b;
-        }
-
-        /* Bloco da Carteira com tom Pastel/Dourado suave */
-        .carteira-card {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 1px solid #fcd34d;
-            border-radius: 15px;
-            padding: 15px;
-            margin-bottom: 25px;
-            color: #78350f;
-        }
-
-        .carteira-topo {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 12px;
-        }
-
-        .carteira-topo span {
-            font-weight: bold;
-            color: #92400e;
-            font-size: 14px;
-        }
-
-        .btn-recarregar {
-            background-color: #d97706;
-            color: white;
-            border: none;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-
-        .carteira-valores {
-            display: flex;
-            justify-content: space-around;
-            text-align: center;
-        }
-
-        .valor-item b {
-            font-size: 16px;
-            color: #78350f;
-            display: block;
-        }
-
-        .valor-item span {
-            font-size: 11px;
-            color: #92400e;
-        }
-
-        /* Lista de Opções do Menu */
-        .menu-opcoes {
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-
-        .opcao-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 14px 10px;
-            border-bottom: 1px solid #e2e8f0;
-            cursor: pointer;
-            font-size: 14px;
-            color: var(--cor-secundaria);
-            background: none;
-            border-top: none;
-            border-left: none;
-            border-right: none;
-            width: 100%;
-            text-align: left;
-        }
-
-        .opcao-item:hover {
-            background-color: #f1f5f9;
-            border-radius: 8px;
-        }
-
-        .opcao-item span {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        /* Modal genérico */
-        .modal-padrao {
+        /* Capa Inicial de Apresentação */
+        .tela-capa {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            justify-content: center;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
+            background-color: #0f172a;
+            cursor: pointer;
             padding: 20px;
         }
 
-        .modal-conteudo {
-            background: white;
+        .logo-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             width: 100%;
-            max-width: 420px;
-            padding: 25px;
-            border-radius: 15px;
-            max-height: 90vh;
-            overflow-y: auto;
+            max-width: 450px;
+            max-height: 70vh;
         }
 
-        .modal-conteudo h3 {
-            color: var(--cor-principal);
-            margin-bottom: 15px;
+        .logo-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            border-radius: 12px;
         }
 
-        .form-grupo {
-            margin-bottom: 12px;
+        .significado-capa {
+            text-align: center;
+            color: #94a3b8;
+            width: 100%;
+            padding: 5px;
         }
 
-        .form-grupo label {
-            display: block;
-            font-size: 12px;
-            font-weight: bold;
-            color: #475569;
+        .significado-capa h3 {
+            color: #f8fafc;
+            font-size: 16px;
             margin-bottom: 4px;
+            letter-spacing: 1px;
         }
 
-        .form-grupo input, .form-grupo textarea, .form-grupo select {
+        .significado-capa p {
+            font-size: 13px;
+            color: #38bdf8;
+            font-style: italic;
+        }
+
+        .legenda-capa {
+            color: #64748b;
             width: 100%;
             padding: 10px;
-            border: 1px solid #cbd5e1;
-            border-radius: 6px;
+            text-align: center;
             font-size: 13px;
+            letter-spacing: 1.5px;
         }
 
-        /* Painel Admin Vermelho */
-        .btn-admin-secreto {
-            background: none;
-            border: none;
-            color: var(--cor-adm);
-            font-size: 12px;
-            cursor: pointer;
-            margin-top: 30px;
+        .esconder-capa {
+            display: none !important;
+        }
+
+        /* Painel de Login / Cadastro */
+        .app-container {
             width: 100%;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--cor-fundo);
+        }
+
+        .painel-acesso {
+            width: 100%;
+            max-width: 420px;
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
             text-align: center;
+            border: 1px solid #cbd5e1;
+        }
+
+        .painel-acesso h2 {
+            color: var(--cor-principal);
+            margin-bottom: 5px;
+            font-size: 24px;
+        }
+
+        .sub-significado {
+            font-size: 12px;
+            color: #0284c7;
+            font-style: italic;
+            margin-bottom: 20px;
             font-weight: bold;
         }
 
-        .painel-adm {
-            background-color: #fef2f2;
-            border: 2px solid var(--cor-adm);
-            border-radius: 10px;
-            padding: 15px;
-            margin-top: 15px;
-            display: none;
+        .input-grupo {
+            margin-bottom: 15px;
+            text-align: left;
         }
 
-        /* Menu Inferior Fixo */
-        .menu-inferior {
-            display: flex;
-            justify-content: space-around;
-            background-color: #ffffff;
-            border-top: 1px solid #e2e8f0;
-            padding: 12px 0;
-            position: sticky;
-            bottom: 0;
+        .input-grupo label {
+            display: block;
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 5px;
+            font-weight: bold;
         }
 
-        .menu-item {
-            background: none;
+        .input-grupo input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #cbd5e1;
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .botao-acao {
+            width: 100%;
+            background-color: var(--cor-principal);
+            color: white;
             border: none;
-            color: #64748b;
-            font-size: 12px;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
             cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .links-uteis {
+            margin-top: 20px;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            gap: 4px;
+            gap: 10px;
+            font-size: 14px;
         }
 
-        .menu-item.ativo {
+        .links-uteis span {
             color: var(--cor-principal);
             font-weight: bold;
+            cursor: pointer;
+        }
+
+        .escondido {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="conteudo-principal">
-            
-            <!-- Topo com Mensagens e Configurações Funcionais -->
-            <div class="topo-botoes">
-                <span title="Mensagens" onclick="abrirMensagens()">✉️</span>
-                <span title="Configurações e Idioma" onclick="abrirConfiguracoes()">⚙️</span>
-            </div>
-
-            <!-- Perfil do Usuário com Foto da Galeria -->
-            <div class="perfil-topo">
-                <div class="foto-avatar-container" onclick="document.getElementById('inputFotoGaleria').click()" title="Alterar foto de perfil">
-                    <div class="foto-avatar" id="avatarDiv">M</div>
-                    <div class="badge-foto">📷</div>
-                    <input type="file" id="inputFotoGaleria" accept="image/*" style="display: none;" onchange="carregarFotoGaleria(event)">
-                </div>
-                <div class="info-usuario">
-                    <h3 id="nomeUsuario">Marilan <span class="tag-pseudonimo">MaryG</span></h3>
-                    <p id="emailUsuario">carregando...</p>
-                </div>
-            </div>
-
-            <!-- Estatísticas -->
-            <div class="estatisticas-box">
-                <div class="estat-item">
-                    <span>12</span>
-                    <label>Seguidores</label>
-                </div>
-                <div class="estat-item">
-                    <span>48</span>
-                    <label>Curtidas</label>
-                </div>
-                <div class="estat-item">
-                    <span>156</span>
-                    <label>Visitantes</label>
-                </div>
-            </div>
-
-            <!-- Seção da Carteira (Moedas e Estrelas) -->
-            <div class="carteira-card">
-                <div class="carteira-topo">
-                    <span>CARTEIRA KADOSH</span>
-                    <button class="btn-recarregar" onclick="alert('Recarga de créditos em desenvolvimento.')">Recarregar</button>
-                </div>
-                <div class="carteira-valores">
-                    <div class="valor-item">
-                        <b>💵 0</b>
-                        <span>Moedas</span>
-                    </div>
-                    <div class="valor-item">
-                        <b>🎁 0</b>
-                        <span>Bônus</span>
-                    </div>
-                    <div class="valor-item">
-                        <b>⭐ 10</b>
-                        <span>Estrelas</span>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Menu de Opções Personalizadas -->
-            <div class="menu-opcoes">
-                <button class="opcao-item" onclick="abrirInscricaoEscritor()">
-                    <span>✍️ Ser um Escritor Kadosh</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Seus cartões premiados e cupons ativos.')">
-                    <span>🎟️ Cartão Premiado / Cupons</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Resgate de estrelas adquiridas na plataforma.')">
-                    <span>⭐ Código de Resgate / Estrelas</span> ➔
-                </button>
-                <button class="opcao-item" onclick="alert('Lista de amigos e escritores que você segue.')">
-                    <span>👥 Seguindo & Amigos</span> ➔
-                </button>
-                <button class="opcao-item" onclick="window.location.href='carteira.html'">
-                    <span>📚 Minhas Compras Kadosh</span> ➔
-                </button>
-                <button class="opcao-item" onclick="abrirSuporte()">
-                    <span>💬 Tirar suas Dúvidas (Suporte)</span> ➔
-                </button>
-                <button class="opcao-item" onclick="abrirConfiguracoes()">
-                    <span>🌐 Língua & Preferência</span> ➔
-                </button>
-            </div>
-
-            <!-- Painel Admin Vermelho -->
-            <button class="btn-admin-secreto" onclick="acessarAdminVermelho()">🔒 Painel Exclusivo da Gestora (Admin)</button>
-
-            <div class="painel-adm" id="painelVermelho">
-                <h4 style="color: var(--cor-adm); margin-bottom: 10px;">🔴 Painel de Gestão Kadoshflow</h4>
-                <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 10px;">Apenas obras originais. Divisão de percentual com autores parceiros.</p>
-                <label style="font-size: 12px; font-weight: bold;">Valor Assinatura VIP (Master):</label>
-                <input type="text" value="R$ 16,00" style="width:100%; padding:8px; margin-top:4px; border:1px solid #fca5a5; border-radius:5px;">
-                <button onclick="alert('Alterações salvas com sucesso!')" style="background:var(--cor-adm); color:white; border:none; padding:8px 15px; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer;">Salvar</button>
-            </div>
-
+    <!-- Capa Inicial de Entrada -->
+    <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Kadoshflow Capa">
         </div>
-
-        <!-- Menu de Navegação Inferior -->
-        <div class="menu-inferior">
-            <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
-            <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
-            <button class="menu-item" onclick="window.location.href='detalhe.html'">👑 VIP</button>
-            <button class="menu-item ativo" onclick="window.location.href='admin.html'">👤 Perfil</button>
+        <div class="significado-capa">
+            <h3>KADOSHFLOW</h3>
+            <p>Consagrado e Separado</p>
         </div>
+        <div class="legenda-capa">Toque na tela para entrar &bull; Leitura &bull; Materiais</div>
     </div>
 
-    <!-- MODAL: INSCRIÇÃO ESCRITOR KADOSH (GRÁTIS COM PORCENTAGEM) -->
-    <div class="modal-padrao" id="modalEscritor">
-        <div class="modal-conteudo">
-            <h3>Ser um Escritor Kadosh</h3>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">A inscrição é <b>totalmente grátis</b>! Suas obras originais serão publicadas e você receberá um adicional (porcentagem de vendas) negociado pela plataforma.</p>
-            
-            <div class="form-grupo">
-                <label>Nome Completo</label>
-                <input type="text" placeholder="Seu nome">
-            </div>
-            <div class="form-grupo">
-                <label>Pseudônimo (Nome de Escritor)</label>
-                <input type="text" placeholder="Ex: MaryG">
-            </div>
-            <div class="form-grupo">
-                <label>E-mail</label>
-                <input type="email" id="emailEscritorInput">
-            </div>
-            <div class="form-grupo">
-                <label>CPF</label>
-                <input type="text" placeholder="000.000.000-00">
-            </div>
-            <div class="form-grupo">
-                <label>Documento com Foto (RG/CNH)</label>
-                <input type="file" accept="image/*">
-            </div>
+    <!-- Painel de Login -->
+    <div class="app-container" id="painelContainer">
+        <div class="painel-acesso">
+            <div id="formEntrar">
+                <h2>Kadoshflow</h2>
+                <div class="sub-significado">Consagrado e Separado</div>
+                
+                <div class="input-grupo">
+                    <label>E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com">
+                </div>
+                <div class="input-grupo">
+                    <label>Senha</label>
+                    <input type="password" id="loginSenha" placeholder="Sua senha">
+                </div>
+                
+                <button class="botao-acao" onclick="realizarLogin()">Entrar</button>
 
-            <div style="display: flex; gap: 10px; margin-top: 15px;">
-                <button onclick="enviarInscricaoEscritor()" style="flex:1; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Concluir Inscrição</button>
-                <button onclick="fecharModal('modalEscritor')" style="background:#cbd5e1; border:none; padding:10px 15px; border-radius:6px; cursor:pointer;">Cancelar</button>
+                <div class="links-uteis">
+                    <span onclick="window.location.href='vitrine.html'">Pular direto para a Vitrine (Modo Visitante)</span>
+                </div>
             </div>
-        </div>
-    </div>
-
-    <!-- MODAL: CONFIGURAÇÕES E IDIOMAS -->
-    <div class="modal-padrao" id="modalConfig">
-        <div class="modal-conteudo">
-            <h3>⚙️ Configurações & Idioma</h3>
-            <div class="form-grupo">
-                <label>Selecione o Idioma:</label>
-                <select id="selectIdioma">
-                    <option value="pt">Português (Brasil)</option>
-                    <option value="en">English (Inglês)</option>
-                    <option value="es">Español (Espanhol)</option>
-                    <option value="fr">Français (Francês)</option>
-                </select>
-            </div>
-            <button onclick="salvarConfiguracoes()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:10px;">Salvar Preferência</button>
-            <button onclick="fecharModal('modalConfig')" style="width:100%; background:#cbd5e1; border:none; padding:10px; border-radius:6px; cursor:pointer; margin-top:8px;">Fechar</button>
-        </div>
-    </div>
-
-    <!-- MODAL: SUPORTE / DÚVIDAS -->
-    <div class="modal-padrao" id="modalSuporte">
-        <div class="modal-conteudo">
-            <h3>💬 Tirar suas Dúvidas (Suporte)</h3>
-            <p style="font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 15px;">
-                <b>• Como pagar?</b> Você pode usar PIX, Cartão ou transferência bancária na aba VIP.<br><br>
-                <b>• Ser escritor é pago?</b> Não! É 100% gratuito. Você recebe uma porcentagem sobre as vendas da sua obra.<br><br>
-                <b>• Como mudar o idioma?</b> Clique no ícone de engrenagem no topo da página de perfil.
-            </p>
-            <button onclick="fecharModal('modalSuporte')" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Entendido</button>
         </div>
     </div>
 
     <script>
-        window.onload = function() {
-            const emailSalvo = localStorage.getItem('kadoshflow_email');
-            if(emailSalvo) {
-                document.getElementById('emailUsuario').textContent = emailSalvo;
-                const inicial = emailSalvo.charAt(0).toUpperCase();
-                document.getElementById('avatarDiv').textContent = inicial;
-                document.getElementById('nomeUsuario').innerHTML = emailSalvo.split('@')[0] + ' <span class="tag-pseudonimo">MaryG</span>';
-                document.getElementById('emailEscritorInput').value = emailSalvo;
-            }
-        };
-
-        // Carregar foto da galeria
-        function carregarFotoGaleria(event) {
-            const arquivo = event.target.files[0];
-            if (arquivo) {
-                const leitor = new FileReader();
-                leitor.onload = function(e) {
-                    const avatarDiv = document.getElementById('avatarDiv');
-                    avatarDiv.textContent = "";
-                    avatarDiv.style.backgroundImage = `url('${e.target.result}')`;
-                }
-                leitor.readAsDataURL(arquivo);
-            }
+        function entrarNoApp() {
+            document.getElementById('telaCapa').classList.add('esconder-capa');
         }
 
-        // Funções de Modais
-        function abrirInscricaoEscritor() { document.getElementById('modalEscritor').style.display = 'flex'; }
-        function abrirConfiguracoes() { document.getElementById('modalConfig').style.display = 'flex'; }
-        function abrirSuporte() { document.getElementById('modalSuporte').style.display = 'flex'; }
-        function abrirMensagens() { alert("Você não possui novas mensagens no momento."); }
-        function fecharModal(id) { document.getElementById('modalConfig').style.display = 'none'; document.getElementById('modalEscritor').style.display = 'none'; document.getElementById('modalSuporte').style.display = 'none'; }
-
-        function enviarInscricaoEscritor() {
-            alert("Inscrição para Escr
-
-
+        function realizarLogin() {
+            const email = document.getElementById('loginEmail').value;
+            if(email) {
+                localStorage.setItem('kadoshflow_email', email);
+            }
+            window.location.href = 'vitrine.html';
+        }
+    </script>
+</body>
+</html>
