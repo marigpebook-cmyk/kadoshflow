@@ -3,60 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Portal Cristão</title>
+    <title>Kadoshflow - Início</title>
     <style>
-       :root {
---cor-principal: #1e3a8a;   /* Azul-marinho principal elegante /
---cor-secundaria: #0f172a;  / Azul-marinho bem escuro para títulos fortes /
---cor-fundo: #f0f4f8;       / Cinza levemente azulado (fundo moderno e limpo) /
---cor-card: #ffffff;        / Branco puro para os blocos /
---cor-borda: #cbd5e1;       / Cinza suave para contornos e separações /
---cor-vip: #d97706;         / Dourado elegante para áreas VIP /
---cor-admin: #047857;       / Verde profissional para o painel admin */
-}
-        body {
+        :root {
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-fundo: #f0f4f8;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body, html {
+            width: 100%;
+            height: 100%;
             font-family: Arial, sans-serif;
             background-color: var(--cor-fundo);
-            color: #333;
-            margin: 0;
-            padding: 15px;
         }
+
+        /* Container que ocupa a tela inteira em qualquer dispositivo */
         .app-container {
-            max-width: 500px;
-            margin: 0 auto;
-            background: var(--cor-card);
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
             padding: 20px;
-            border-radius: 16px;
-            box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12);
-            border: 1px solid var(--cor-borda);
+            background-color: var(--cor-principal);
+        }
+
+        /* Estilo da Logo adaptável para ficar grandona e elegante */
+        .logo-container {
+            text-align: center;
+            max-width: 600px;
+            width: 100%;
+            padding: 20px;
+        }
+
+        .logo-container img {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+            margin-bottom: 30px;
+        }
+
+        h1 {
+            color: #ffffff;
+            font-size: 28px;
+            margin-bottom: 10px;
             text-align: center;
         }
-        #tela-splash {
-            padding: 40px 20px;
+
+        p {
+            color: #e2e8f0;
+            font-size: 16px;
+            margin-bottom: 30px;
+            text-align: center;
         }
-        .botao-iniciar {
-            background-color: var(--cor-principal);
-            color: white;
+
+        /* Botão de Entrar estilizado */
+        .botao-entrar {
+            background-color: #ffffff;
+            color: var(--cor-principal);
             border: none;
-            padding: 12px 35px;
-            border-radius: 25px;
-            font-size: 15px;
+            padding: 15px 40px;
+            font-size: 18px;
             font-weight: bold;
+            border-radius: 30px;
             cursor: pointer;
-            margin-top: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+            transition: transform 0.2s, background-color 0.2s;
+        }
+
+        .botao-entrar:hover {
+            background-color: #f8fafc;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <div id="tela-splash">
-        <!-- Cole o link da sua imagem no lugar de COLE_O_LINK_AQUI -->
-        <img src="COLE_O_LINK_AQUI" alt="Logo Kadoshflow" style="width: 170px; height: 170px; border-radius: 50%; object-fit: cover; border: 3px solid var(--cor-vip); box-shadow: 0 4px 15px rgba(0,0,0,0.15); margin-bottom: 15px;">
-        <h2 style="color: var(--cor-secundaria); margin-bottom: 5px;">Kadoshflow</h2>
-        <p style="color: var(--cor-principal); font-size: 13px;">Portal de Leitura, EBD e Edificação Cristã</p>
-        <button class="botao-iniciar" onclick="window.location.href='vitrine.html'">Iniciar Aplicativo</button>
+
+    <div class="app-container">
+        <div class="logo-container">
+            <!-- Certifique-se de que o nome da imagem está idêntico: logo.jpg -->
+            <img src="logo.jpg" alt="Logo Kadoshflow">
+            <h1>Kadoshflow</h1>
+            <p>Sua plataforma de leitura e histórias.</p>
+            
+            <button class="botao-entrar" onclick="window.location.href='vitrine.html'">Entrar no App</button>
+        </div>
     </div>
-</div>
+
 </body>
 </html>
-
