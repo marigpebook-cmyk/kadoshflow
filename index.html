@@ -27,7 +27,7 @@
             overflow: hidden;
         }
 
-        /* 1. Capa Inicial em Tela Cheia */
+        /* Capa Inicial */
         .tela-capa {
             position: fixed;
             top: 0;
@@ -39,31 +39,38 @@
             flex-direction: column;
             justify-content: space-between;
             align-items: center;
-            background-color: #000;
+            background-color: #0f172a;
             cursor: pointer;
             transition: opacity 0.5s ease;
+            padding: 20px;
         }
 
-        .tela-capa img {
+        .logo-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            max-width: 450px;
+            max-height: 75vh;
+        }
+
+        .logo-wrapper img {
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            position: absolute;
-            top: 0;
-            left: 0;
-            z-index: 1;
+            object-fit: contain;
+            border-radius: 12px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.4);
         }
 
         .legenda-capa {
-            position: relative;
-            z-index: 2;
-            background: rgba(15, 23, 42, 0.85);
-            color: #ffffff;
+            background: transparent;
+            color: #94a3b8;
             width: 100%;
-            padding: 15px;
+            padding: 10px;
             text-align: center;
-            font-size: 15px;
-            letter-spacing: 1px;
+            font-size: 14px;
+            letter-spacing: 1.5px;
             font-weight: bold;
         }
 
@@ -72,7 +79,7 @@
             pointer-events: none;
         }
 
-        /* 2. Tela Principal do App (Acesso / Boas-vindas livres) */
+        /* Painel de Acesso */
         .app-container {
             width: 100%;
             height: 100vh;
@@ -118,13 +125,32 @@
             font-weight: bold;
         }
 
+        /* Caixa de input com o botão do olhinho embutido */
+        .input-senha-box {
+            position: relative;
+            width: 100%;
+        }
+
         .input-grupo input {
             width: 100%;
             padding: 12px;
+            padding-right: 45px; /* Espaço para o olhinho não tampar o texto */
             border: 1px solid var(--cor-borda);
             border-radius: 8px;
             font-size: 15px;
             outline: none;
+        }
+
+        .btn-olho {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 18px;
+            color: #64748b;
         }
 
         .botao-acao {
@@ -169,14 +195,15 @@
 </head>
 <body>
 
-    <!-- Capa Inicial com Logo em Tela Cheia e Legenda -->
+    <!-- Capa Inicial -->
     <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
-        <img src="logo.jpg" alt="Kadoshflow Capa">
-        <div style="width: 100%;"></div> <!-- Espaçador -->
+        <div class="logo-wrapper">
+            <img src="logo.jpg" alt="Kadoshflow Capa">
+        </div>
         <div class="legenda-capa">Leitura • Materiais • Escritores</div>
     </div>
 
-    <!-- Painel de Login / Inscrição (Aparece logo após sair da capa) -->
+    <!-- Painel de Login / Inscrição -->
     <div class="app-container" id="painelContainer">
         <div class="painel-acesso">
             
@@ -191,7 +218,10 @@
                 </div>
                 <div class="input-grupo">
                     <label>Senha</label>
-                    <input type="password" id="loginSenha" placeholder="Sua senha">
+                    <div class="input-senha-box">
+                        <input type="password" id="loginSenha" placeholder="Sua senha">
+                        <button type="button" class="btn-olho" onclick="alternarVisibilidadeSenha('loginSenha', this)">👁️</button>
+                    </div>
                 </div>
                 
                 <button class="botao-acao" onclick="realizarLogin()">Entrar</button>
@@ -203,7 +233,7 @@
                 </div>
             </div>
 
-            <!-- FORMULÁRIO DE INSCRIÇÃO (CADASTRO) -->
+            <!-- FORMULÁRIO DE INSCRIÇÃO -->
             <div id="formCadastro" class="escondido">
                 <h2>Criar Conta Gratuita</h2>
                 <p class="sub-titulo">Inscreva-se para ter acesso completo às leituras.</p>
@@ -214,11 +244,17 @@
                 </div>
                 <div class="input-grupo">
                     <label>Senha</label>
-                    <input type="password" id="cadSenha" placeholder="Crie uma senha">
+                    <div class="input-senha-box">
+                        <input type="password" id="cadSenha" placeholder="Crie uma senha">
+                        <button type="button" class="btn-olho" onclick="alternarVisibilidadeSenha('cadSenha', this)">👁️</button>
+                    </div>
                 </div>
                 <div class="input-grupo">
                     <label>Confirmar Senha</label>
-                    <input type="password" id="cadConfirmaSenha" placeholder="Repita a senha">
+                    <div class="input-senha-box">
+                        <input type="password" id="cadConfirmaSenha" placeholder="Repita a senha">
+                        <button type="button" class="btn-olho" onclick="alternarVisibilidadeSenha('cadConfirmaSenha', this)">👁️</button>
+                    </div>
                 </div>
                 
                 <button class="botao-acao" onclick="realizarCadastro()">Concluir Inscrição</button>
@@ -232,13 +268,11 @@
     </div>
 
     <script>
-        // Tira a capa ao tocar
         function entrarNoApp() {
             const capa = document.getElementById('telaCapa');
             capa.classList.add('esconder-capa');
         }
 
-        // Alterna entre Entrar e Inscrever-se
         function alternarTela(tipo) {
             const fEntrar = document.getElementById('formEntrar');
             const fCadastro = document.getElementById('formCadastro');
@@ -252,7 +286,18 @@
             }
         }
 
-        // Cadastrar novo usuário (salva no navegador)
+        // Função do olhinho para mostrar ou esconder a senha
+        function alternarVisibilidadeSenha(idInput, botao) {
+            const input = document.getElementById(idInput);
+            if (input.type === "password") {
+                input.type = "text";
+                botao.textContent = "🙈"; // Muda o ícone para indicar que está visível
+            } else {
+                input.type = "password";
+                botao.textContent = "👁️"; // Volta ao olhinho normal
+            }
+        }
+
         function realizarCadastro() {
             const email = document.getElementById('cadEmail').value.trim();
             const senha = document.getElementById('cadSenha').value;
@@ -268,7 +313,6 @@
                 return;
             }
 
-            // Salva os dados do usuário para lembrar depois
             localStorage.setItem('kadoshflow_email', email);
             localStorage.setItem('kadoshflow_senha', senha);
 
@@ -276,7 +320,6 @@
             window.location.href = 'vitrine.html';
         }
 
-        // Fazer login com os dados salvos
         function realizarLogin() {
             const emailInput = document.getElementById('loginEmail').value.trim();
             const senhaInput = document.getElementById('loginSenha').value;
@@ -289,7 +332,6 @@
                 return;
             }
 
-            // Se houver cadastro salvo, valida. Caso contrário, libera acesso livre para teste.
             if(emailSalvo && senhaSalva) {
                 if(emailInput === emailSalvo && senhaInput === senhaSalva) {
                     window.location.href = 'vitrine.html';
@@ -297,14 +339,12 @@
                     alert("E-mail ou senha incorretos.");
                 }
             } else {
-                // Se ainda não tem cadastro salvo na máquina, cadastra na hora com o que digitou
                 localStorage.setItem('kadoshflow_email', emailInput);
                 localStorage.setItem('kadoshflow_senha', senhaInput);
                 window.location.href = 'vitrine.html';
             }
         }
 
-        // Recuperação de senha simples por e-mail
         function esqueciSenha() {
             const email = prompt("Digite seu e-mail cadastrado para recuperar a senha:");
             const emailSalvo = localStorage.getItem('kadoshflow_email');
@@ -318,11 +358,11 @@
             }
         }
 
-        // Permitir entrar na vitrine sem logar imediatamente (Modo Visitante)
         function irParaVitrineLivre() {
             window.location.href = 'vitrine.html';
         }
     </script>
 </body>
 </html>
+
 
