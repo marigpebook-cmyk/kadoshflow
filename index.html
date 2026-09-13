@@ -5,11 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Kadoshflow - Início</title>
     <style>
-        :root {
-            --cor-principal: #1e3a8a;
-            --cor-secundaria: #0f172a;
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
@@ -20,10 +15,11 @@
             width: 100%;
             height: 100%;
             font-family: Arial, sans-serif;
-            background-color: #0f172a;
+            background-color: #000000;
+            overflow: hidden;
         }
 
-        /* Capa Inicial com Logo Grandona */
+        /* Capa de Entrada com Imagem Grande Ocupando a Tela Toda */
         .tela-capa {
             position: fixed;
             top: 0;
@@ -32,67 +28,19 @@
             height: 100vh;
             z-index: 100;
             display: flex;
-            flex-direction: column;
-            justify-content: space-between;
+            justify-content: center;
             align-items: center;
             background-color: #0f172a;
             cursor: pointer;
-            padding: 30px;
         }
 
-        .logo-wrapper {
-            flex: 1;
-            display: flex;
-            justify-content: center;
-            align-items: center;
+        .tela-capa img {
             width: 100%;
-            max-width: 600px;
+            height: 100%;
+            object-fit: cover; /* Cobre a tela inteira perfeitamente */
         }
 
-        .logo-wrapper img {
-            width: 100%;
-            max-height: 75vh;
-            object-fit: contain;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-        }
-
-        .significado-capa {
-            text-align: center;
-            color: #94a3b8;
-            width: 100%;
-            padding: 10px;
-        }
-
-        .significado-capa h3 {
-            color: #f8fafc;
-            font-size: 20px;
-            margin-bottom: 5px;
-            letter-spacing: 1.5px;
-        }
-
-        .significado-capa p {
-            font-size: 14px;
-            color: #38bdf8;
-            font-style: italic;
-        }
-
-        .legenda-capa {
-            color: #cbd5e1;
-            width: 100%;
-            padding: 15px;
-            text-align: center;
-            font-size: 14px;
-            font-weight: bold;
-            background: rgba(15, 23, 42, 0.9);
-            border-radius: 8px;
-        }
-
-        .esconder-capa {
-            display: none !important;
-        }
-
-        /* Painel de Acesso / Inscrição */
+        /* Painel de Login e Inscrição (Aparece após o toque) */
         .app-container {
             width: 100%;
             height: 100vh;
@@ -115,17 +63,9 @@
         }
 
         .painel-acesso h2 {
-            color: var(--cor-principal);
-            margin-bottom: 5px;
+            color: #1e3a8a;
+            margin-bottom: 15px;
             font-size: 24px;
-        }
-
-        .sub-significado {
-            font-size: 13px;
-            color: #0284c7;
-            font-style: italic;
-            margin-bottom: 20px;
-            font-weight: bold;
         }
 
         .input-grupo {
@@ -152,7 +92,7 @@
 
         .botao-acao {
             width: 100%;
-            background-color: var(--cor-principal);
+            background-color: #1e3a8a;
             color: white;
             border: none;
             padding: 12px;
@@ -172,7 +112,7 @@
         }
 
         .links-uteis span {
-            color: var(--cor-principal);
+            color: #1e3a8a;
             font-weight: bold;
             cursor: pointer;
             text-decoration: underline;
@@ -185,26 +125,16 @@
 </head>
 <body>
 
-    <!-- Capa Inicial Grandona -->
+    <!-- Capa de Entrada com Logo em Tela Cheia -->
     <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
-        <div class="logo-wrapper">
-            <img src="logo.jpg" alt="Kadoshflow Capa" onerror="this.onerror=null; this.src='Logo.jpg';">
-        </div>
-        <div class="significado-capa">
-            <h3>KADOSHFLOW</h3>
-            <p>Consagrado e Separado</p>
-        </div>
-        <div class="legenda-capa">Toque em qualquer lugar para entrar no App</div>
+        <img src="logo.jpg" alt="Kadoshflow Capa" onerror="this.onerror=null; this.src='Logo.jpg';">
     </div>
 
     <!-- Painel de Login e Inscrição -->
-    <div class="app-container" id="painelContainer">
+    <div class="app-container">
         <div class="painel-acesso">
-            
             <div id="formEntrar">
                 <h2>Kadoshflow</h2>
-                <div class="sub-significado">Consagrado e Separado</div>
-                
                 <div class="input-grupo">
                     <label>E-mail</label>
                     <input type="email" id="loginEmail" placeholder="seu@email.com">
@@ -224,8 +154,6 @@
 
             <div id="formCadastro" class="escondido">
                 <h2>Criar Conta Gratuita</h2>
-                <div class="sub-significado">Consagrado e Separado</div>
-                
                 <div class="input-grupo">
                     <label>E-mail</label>
                     <input type="email" id="cadEmail" placeholder="seu@email.com">
@@ -245,13 +173,12 @@
                     <span onclick="alternarTela('entrar')">Já tem uma conta? Entrar</span>
                 </div>
             </div>
-
         </div>
     </div>
 
     <script>
         function entrarNoApp() {
-            document.getElementById('telaCapa').classList.add('esconder-capa');
+            document.getElementById('telaCapa').classList.add('escondido');
         }
 
         function alternarTela(tipo) {
@@ -269,30 +196,14 @@
         function realizarCadastro() {
             const email = document.getElementById('cadEmail').value.trim();
             const senha = document.getElementById('cadSenha').value;
-            const confirma = document.getElementById('cadConfirmaSenha').value;
-
-            if(!email || !senha || !confirma) {
-                alert("Por favor, preencha todos os campos.");
-                return;
-            }
-            if(senha !== confirma) {
-                alert("As senhas não coincidem.");
-                return;
-            }
+            if(!email || !senha) { alert("Preencha todos os campos."); return; }
             localStorage.setItem('kadoshflow_email', email);
-            localStorage.setItem('kadoshflow_senha', senha);
-            localStorage.setItem('kadoshflow_status_vip', 'nao');
-            alert("Inscrição realizada com sucesso!");
             window.location.href = 'vitrine.html';
         }
 
         function realizarLogin() {
             const email = document.getElementById('loginEmail').value.trim();
-            const senha = document.getElementById('loginSenha').value;
-            if(!email || !senha) {
-                alert("Digite seu e-mail e senha.");
-                return;
-            }
+            if(!email) { alert("Digite seu e-mail."); return; }
             localStorage.setItem('kadoshflow_email', email);
             window.location.href = 'vitrine.html';
         }
