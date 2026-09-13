@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Início</title>
+    <title>Kadoshflow</title>
     <style>
         :root {
             --cor-principal: #1e3a8a;
             --cor-secundaria: #0f172a;
             --cor-fundo: #f0f4f8;
+            --cor-card: #ffffff;
+            --cor-borda: #cbd5e1;
         }
 
         * {
@@ -21,84 +23,305 @@
             width: 100%;
             height: 100%;
             font-family: Arial, sans-serif;
-            background-color: var(--cor-fundo);
+            background-color: var(--cor-secundaria);
+            overflow: hidden;
         }
 
-        /* Container que ocupa a tela inteira em qualquer dispositivo */
-        .app-container {
-            width: 100%;
-            min-height: 100vh;
+        /* 1. Capa Inicial em Tela Cheia */
+        .tela-capa {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 100;
             display: flex;
             flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            background-color: #000;
+            cursor: pointer;
+            transition: opacity 0.5s ease;
+        }
+
+        .tela-capa img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+        }
+
+        .legenda-capa {
+            position: relative;
+            z-index: 2;
+            background: rgba(15, 23, 42, 0.85);
+            color: #ffffff;
+            width: 100%;
+            padding: 15px;
+            text-align: center;
+            font-size: 15px;
+            letter-spacing: 1px;
+            font-weight: bold;
+        }
+
+        .esconder-capa {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 2. Tela Principal do App (Acesso / Boas-vindas livres) */
+        .app-container {
+            width: 100%;
+            height: 100vh;
+            display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-color: var(--cor-principal);
+            background-color: var(--cor-secundaria);
         }
 
-        /* Estilo da Logo adaptável para ficar grandona e elegante */
-        .logo-container {
-            text-align: center;
-            max-width: 600px;
+        .painel-acesso {
             width: 100%;
-            padding: 20px;
-        }
-
-        .logo-container img {
-            width: 100%;
-            max-width: 350px;
-            height: auto;
+            max-width: 420px;
+            background-color: var(--cor-card);
+            padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.4);
-            margin-bottom: 30px;
-        }
-
-        h1 {
-            color: #ffffff;
-            font-size: 28px;
-            margin-bottom: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.3);
             text-align: center;
         }
 
-        p {
-            color: #e2e8f0;
-            font-size: 16px;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-
-        /* Botão de Entrar estilizado */
-        .botao-entrar {
-            background-color: #ffffff;
+        .painel-acesso h2 {
             color: var(--cor-principal);
-            border: none;
-            padding: 15px 40px;
-            font-size: 18px;
-            font-weight: bold;
-            border-radius: 30px;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: transform 0.2s, background-color 0.2s;
+            margin-bottom: 10px;
+            font-size: 24px;
         }
 
-        .botao-entrar:hover {
-            background-color: #f8fafc;
-            transform: scale(1.05);
+        .sub-titulo {
+            font-size: 13px;
+            color: #64748b;
+            margin-bottom: 25px;
+        }
+
+        .input-grupo {
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .input-grupo label {
+            display: block;
+            font-size: 13px;
+            color: #475569;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        .input-grupo input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--cor-borda);
+            border-radius: 8px;
+            font-size: 15px;
+            outline: none;
+        }
+
+        .botao-acao {
+            width: 100%;
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .botao-acao:hover {
+            opacity: 0.9;
+        }
+
+        .links-uteis {
+            margin-top: 20px;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            font-size: 14px;
+        }
+
+        .links-uteis span {
+            color: var(--cor-principal);
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .links-uteis span:hover {
+            text-decoration: underline;
+        }
+
+        .escondido {
+            display: none;
         }
     </style>
 </head>
 <body>
 
-    <div class="app-container">
-        <div class="logo-container">
-            <!-- Certifique-se de que o nome da imagem está idêntico: logo.jpg -->
-            <img src="logo.jpg" alt="Logo Kadoshflow">
-            <h1>Kadoshflow</h1>
-            <p>Sua plataforma de leitura e histórias.</p>
+    <!-- Capa Inicial com Logo em Tela Cheia e Legenda -->
+    <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
+        <img src="logo.jpg" alt="Kadoshflow Capa">
+        <div style="width: 100%;"></div> <!-- Espaçador -->
+        <div class="legenda-capa">Leitura • Materiais • Escritores</div>
+    </div>
+
+    <!-- Painel de Login / Inscrição (Aparece logo após sair da capa) -->
+    <div class="app-container" id="painelContainer">
+        <div class="painel-acesso">
             
-            <button class="botao-entrar" onclick="window.location.href='vitrine.html'">Entrar no App</button>
+            <!-- FORMULÁRIO DE ENTRAR -->
+            <div id="formEntrar">
+                <h2>Bem-vindo ao Kadoshflow</h2>
+                <p class="sub-titulo">Entre com sua conta ou pule para conhecer a vitrine.</p>
+                
+                <div class="input-grupo">
+                    <label>E-mail</label>
+                    <input type="email" id="loginEmail" placeholder="seu@email.com">
+                </div>
+                <div class="input-grupo">
+                    <label>Senha</label>
+                    <input type="password" id="loginSenha" placeholder="Sua senha">
+                </div>
+                
+                <button class="botao-acao" onclick="realizarLogin()">Entrar</button>
+
+                <div class="links-uteis">
+                    <span onclick="esqueciSenha()">Esqueci minha senha</span>
+                    <div>Não tem conta? <span onclick="alternarTela('cadastro')">Inscrever-se</span></div>
+                    <div style="margin-top: 10px;"><span style="color: #64748b; font-weight: normal;" onclick="irParaVitrineLivre()">Pular por enquanto (Modo Visitante)</span></div>
+                </div>
+            </div>
+
+            <!-- FORMULÁRIO DE INSCRIÇÃO (CADASTRO) -->
+            <div id="formCadastro" class="escondido">
+                <h2>Criar Conta Gratuita</h2>
+                <p class="sub-titulo">Inscreva-se para ter acesso completo às leituras.</p>
+                
+                <div class="input-grupo">
+                    <label>E-mail</label>
+                    <input type="email" id="cadEmail" placeholder="seu@email.com">
+                </div>
+                <div class="input-grupo">
+                    <label>Senha</label>
+                    <input type="password" id="cadSenha" placeholder="Crie uma senha">
+                </div>
+                <div class="input-grupo">
+                    <label>Confirmar Senha</label>
+                    <input type="password" id="cadConfirmaSenha" placeholder="Repita a senha">
+                </div>
+                
+                <button class="botao-acao" onclick="realizarCadastro()">Concluir Inscrição</button>
+
+                <div class="links-uteis">
+                    <div>Já tem uma conta? <span onclick="alternarTela('entrar')">Entrar</span></div>
+                </div>
+            </div>
+
         </div>
     </div>
 
+    <script>
+        // Tira a capa ao tocar
+        function entrarNoApp() {
+            const capa = document.getElementById('telaCapa');
+            capa.classList.add('esconder-capa');
+        }
+
+        // Alterna entre Entrar e Inscrever-se
+        function alternarTela(tipo) {
+            const fEntrar = document.getElementById('formEntrar');
+            const fCadastro = document.getElementById('formCadastro');
+
+            if(tipo === 'cadastro') {
+                fEntrar.classList.add('escondido');
+                fCadastro.classList.remove('escondido');
+            } else {
+                fCadastro.classList.add('escondido');
+                fEntrar.classList.remove('escondido');
+            }
+        }
+
+        // Cadastrar novo usuário (salva no navegador)
+        function realizarCadastro() {
+            const email = document.getElementById('cadEmail').value.trim();
+            const senha = document.getElementById('cadSenha').value;
+            const confirma = document.getElementById('cadConfirmaSenha').value;
+
+            if(!email || !senha || !confirma) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            if(senha !== confirma) {
+                alert("As senhas não coincidem. Verifique e tente novamente.");
+                return;
+            }
+
+            // Salva os dados do usuário para lembrar depois
+            localStorage.setItem('kadoshflow_email', email);
+            localStorage.setItem('kadoshflow_senha', senha);
+
+            alert("Inscrição realizada com sucesso! Bem-vinda ao Kadoshflow.");
+            window.location.href = 'vitrine.html';
+        }
+
+        // Fazer login com os dados salvos
+        function realizarLogin() {
+            const emailInput = document.getElementById('loginEmail').value.trim();
+            const senhaInput = document.getElementById('loginSenha').value;
+
+            const emailSalvo = localStorage.getItem('kadoshflow_email');
+            const senhaSalva = localStorage.getItem('kadoshflow_senha');
+
+            if(!emailInput || !senhaInput) {
+                alert("Digite seu e-mail e senha para entrar.");
+                return;
+            }
+
+            // Se houver cadastro salvo, valida. Caso contrário, libera acesso livre para teste.
+            if(emailSalvo && senhaSalva) {
+                if(emailInput === emailSalvo && senhaInput === senhaSalva) {
+                    window.location.href = 'vitrine.html';
+                } else {
+                    alert("E-mail ou senha incorretos.");
+                }
+            } else {
+                // Se ainda não tem cadastro salvo na máquina, cadastra na hora com o que digitou
+                localStorage.setItem('kadoshflow_email', emailInput);
+                localStorage.setItem('kadoshflow_senha', senhaInput);
+                window.location.href = 'vitrine.html';
+            }
+        }
+
+        // Recuperação de senha simples por e-mail
+        function esqueciSenha() {
+            const email = prompt("Digite seu e-mail cadastrado para recuperar a senha:");
+            const emailSalvo = localStorage.getItem('kadoshflow_email');
+
+            if(email) {
+                if(emailSalvo && email.trim() === emailSalvo) {
+                    alert("Um link de recuperação foi simulado e enviado para o seu e-mail cadastrado.");
+                } else {
+                    alert("E-mail não encontrado em nossa base de inscritos.");
+                }
+            }
+        }
+
+        // Permitir entrar na vitrine sem logar imediatamente (Modo Visitante)
+        function irParaVitrineLivre() {
+            window.location.href = 'vitrine.html';
+        }
+    </script>
 </body>
 </html>
