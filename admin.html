@@ -97,10 +97,9 @@
             font-weight: bold;
         }
 
-        /* Amigos, Seguidores e Seguindo posicionados perto do nome */
         .amigos-seguidores-bar {
             display: flex;
-            gap: 15px;
+            gap: 10px;
             font-size: 12px;
             color: #475569;
             margin-bottom: 20px;
@@ -265,13 +264,11 @@
     <div class="app-container">
         <div class="conteudo-principal">
             
-            <!-- Topo com Mensagens e Configurações Funcionais -->
             <div class="topo-botoes">
-                <span title="Mensagens" onclick="abrirMensagens()">✉️</span>
-                <span title="Configurações" onclick="abrirConfiguracoes()">⚙️</span>
+                <span title="Mensagens" onclick="abrirModal('modalMensagens')">✉️</span>
+                <span title="Configurações" onclick="abrirModal('modalConfig')">⚙️</span>
             </div>
 
-            <!-- Perfil do Usuário -->
             <div class="perfil-topo">
                 <div class="foto-avatar" id="avatarDiv" onclick="document.getElementById('inputFoto').click()">M</div>
                 <input type="file" id="inputFoto" accept="image/*" style="display:none;" onchange="mudarFoto(event)">
@@ -281,21 +278,18 @@
                 </div>
             </div>
 
-            <!-- Barra de Amigos e Seguidores no Topo -->
             <div class="amigos-seguidores-bar">
-                <div onclick="alert('Lista de Seguidores')">Seguidores: <span id="numSeguidores">12</span></div>
-                <div onclick="alert('Lista de Amigos Conectados')">Amigos: <span id="numAmigos">5</span></div>
-                <div onclick="alert('Pessoas que você está seguindo')">Seguindo: <span id="numSeguindo">8</span></div>
+                <div onclick="alert('Lista de Seguidores')">Seguidores: <span>12</span></div>
+                <div onclick="alert('Lista de Amigos Conectados')">Amigos: <span>5</span></div>
+                <div onclick="alert('Pessoas que você está seguindo')">Seguindo: <span>8</span></div>
             </div>
 
-            <!-- Estatísticas -->
             <div class="estatisticas-box">
                 <div class="estat-item"><span>12</span><label>Seguidores</label></div>
                 <div class="estat-item"><span>48</span><label>Curtidas</label></div>
                 <div class="estat-item"><span>156</span><label>Visitantes</label></div>
             </div>
 
-            <!-- Carteira -->
             <div class="carteira-card">
                 <div class="carteira-topo">
                     <span style="font-weight:bold; color:#92400e;">CARTEIRA KADOSH</span>
@@ -307,10 +301,9 @@
                 </div>
             </div>
 
-            <!-- Menu de Opções -->
             <div class="menu-opcoes">
                 <button class="opcao-item" onclick="abrirModal('modalEscritor')"><span>✍️ Ser um Escritor Kadosh</span> ➔</button>
-                <button class="opcao-item" onclick="alert('Cartão premiado e cupons ativos.')"><span>🎟️ Cartão Premiado / Cupons</span> ➔</button>
+                <button class="opcao-item" onclick="alert('Cartão premiado e cupons ativos: direito a leitura extra de 20 páginas!')"><span>🎟️ Cartão Premiado / Cupons</span> ➔</button>
                 <button class="opcao-item" onclick="window.location.href='carteira.html'"><span>📚 Minhas Compras Kadosh</span> ➔</button>
                 <button class="opcao-item" onclick="abrirModal('modalSuporte')"><span>💬 Tirar suas Dúvidas (Suporte)</span> ➔</button>
                 <button class="opcao-item" onclick="abrirModal('modalConfig')"><span>🌐 Língua & Preferência</span> ➔</button>
@@ -325,14 +318,33 @@
         </div>
     </div>
 
-    <!-- MODAL SUPORTE -->
+    <!-- MODAL DE MENSAGENS -->
+    <div class="modal-padrao" id="modalMensagens">
+        <div class="modal-conteudo">
+            <h3>✉️ Central de Mensagens</h3>
+            <p style="font-size: 13px; color: #475569; margin-bottom: 15px;">Mensagens pessoais e comentários públicos em obras:</p>
+            <div style="background: #f1f5f9; padding: 10px; border-radius: 8px; margin-bottom: 10px; font-size: 13px;">
+                <b>Suporte Kadoshflow:</b> Bem-vinda à plataforma! Seu perfil está ativo.
+            </div>
+            <div class="form-grupo">
+                <textarea placeholder="Escrever nova mensagem..." style="height: 60px;"></textarea>
+            </div>
+            <button onclick="alert('Mensagem enviada com sucesso!'); fecharModais();" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Enviar Mensagem</button>
+            <button onclick="fecharModais()" style="width:100%; background:#cbd5e1; border:none; padding:8px; border-radius:6px; cursor:pointer; margin-top:5px;">Fechar</button>
+        </div>
+    </div>
+
+    <!-- MODAL SUPORTE COM PERGUNTAS E RESPOSTAS -->
     <div class="modal-padrao" id="modalSuporte">
         <div class="modal-conteudo">
             <h3>💬 Tirar suas Dúvidas (Suporte)</h3>
-            <p style="font-size: 13px; color: #475569; line-height: 1.5; margin-bottom: 15px;">
-                <b>• Como pagar?</b> Acesse a aba VIP e escolha seu banco ou PIX.<br><br>
-                <b>• Ser escritor é pago?</b> Não! É 100% gratuito e você recebe uma porcentagem sobre suas obras originais.<br><br>
-                <b>• Idioma:</b> Você pode alterar nas configurações de preferência.
+            <p style="font-size: 12px; color: #475569; line-height: 1.4; margin-bottom: 15px;">
+                <b>• Como pagar o acesso VIP?</b><br>
+                Na aba VIP você pode escolher entre os planos <b>Semanal (R$ 4,00)</b>, <b>Quinzenal (R$ 10,30)</b>, <b>Mensal (R$ 18,00)</b> ou <b>Anual (R$ 120,00)</b> e pagar com PIX (QR Code instantâneo) ou transferência bancária.<br><br>
+                <b>• Ser escritor é pago?</b><br>
+                Não! É <b>100% gratuito</b>. Suas obras originais são publicadas e você recebe uma porcentagem sobre as vendas na plataforma.<br><br>
+                <b>• Como funcionam os cartões premiados?</b><br>
+                Eles dão direito a leituras extras (20 a 30 páginas) em livros selecionados.
             </p>
             <button onclick="fecharModais()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Entendido</button>
         </div>
@@ -343,7 +355,7 @@
         <div class="modal-conteudo">
             <h3>⚙️ Língua & Preferência</h3>
             <div class="form-grupo">
-                <label>Idioma:</label>
+                <label>Idioma do Aplicativo:</label>
                 <select>
                     <option>Português (Brasil)</option>
                     <option>English</option>
@@ -351,7 +363,7 @@
                     <option>Français</option>
                 </select>
             </div>
-            <button onclick="fecharModais()" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Salvar</button>
+            <button onclick="alert('Idioma alterado com sucesso!'); fecharModais();" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Salvar Preferência</button>
         </div>
     </div>
 
@@ -359,10 +371,10 @@
     <div class="modal-padrao" id="modalEscritor">
         <div class="modal-conteudo">
             <h3>Ser um Escritor Kadosh</h3>
-            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Inscrição 100% grátis para publicação de obras originais.</p>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Inscrição 100% grátis. Ganhe porcentagem sobre suas obras originais.</p>
             <div class="form-grupo"><label>Nome Completo</label><input type="text"></div>
             <div class="form-grupo"><label>Pseudônimo</label><input type="text" value="MaryG"></div>
-            <button onclick="alert('Inscrição enviada com sucesso!'); fecharModais();" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Enviar</button>
+            <button onclick="alert('Inscrição para Escritor Kadosh enviada!'); fecharModais();" style="width:100%; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Enviar Inscrição</button>
         </div>
     </div>
 
@@ -392,8 +404,6 @@
 
         function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
         function fecharModais() { document.querySelectorAll('.modal-padrao').forEach(m => m.style.display = 'none'); }
-        function abrirMensagens() { alert("Caixa de mensagens vazia."); }
     </script>
 </body>
 </html>
-

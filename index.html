@@ -8,7 +8,6 @@
         :root {
             --cor-principal: #1e3a8a;
             --cor-secundaria: #0f172a;
-            --cor-fundo: #ffffff;
         }
 
         * {
@@ -24,7 +23,7 @@
             background-color: #0f172a;
         }
 
-        /* Capa Inicial de Entrada */
+        /* Capa Inicial com Logo Grandona */
         .tela-capa {
             position: fixed;
             top: 0;
@@ -38,7 +37,7 @@
             align-items: center;
             background-color: #0f172a;
             cursor: pointer;
-            padding: 20px;
+            padding: 30px;
         }
 
         .logo-wrapper {
@@ -47,28 +46,29 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 500px;
+            max-width: 600px;
         }
 
         .logo-wrapper img {
             width: 100%;
-            max-height: 70vh;
+            max-height: 75vh;
             object-fit: contain;
-            border-radius: 12px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .significado-capa {
             text-align: center;
             color: #94a3b8;
             width: 100%;
-            padding: 5px;
+            padding: 10px;
         }
 
         .significado-capa h3 {
             color: #f8fafc;
-            font-size: 18px;
-            margin-bottom: 4px;
-            letter-spacing: 1px;
+            font-size: 20px;
+            margin-bottom: 5px;
+            letter-spacing: 1.5px;
         }
 
         .significado-capa p {
@@ -85,13 +85,14 @@
             font-size: 14px;
             font-weight: bold;
             background: rgba(15, 23, 42, 0.9);
+            border-radius: 8px;
         }
 
         .esconder-capa {
             display: none !important;
         }
 
-        /* Painel de Login e Inscrição */
+        /* Painel de Acesso / Inscrição */
         .app-container {
             width: 100%;
             height: 100vh;
@@ -99,7 +100,7 @@
             justify-content: center;
             align-items: center;
             padding: 20px;
-            background-color: var(--cor-fundo);
+            background-color: #ffffff;
         }
 
         .painel-acesso {
@@ -154,7 +155,6 @@
             background-color: var(--cor-principal);
             color: white;
             border: none;
-            print-color-adjust: exact;
             padding: 12px;
             font-size: 16px;
             font-weight: bold;
@@ -185,10 +185,9 @@
 </head>
 <body>
 
-    <!-- Capa Inicial com Logo e Significado -->
+    <!-- Capa Inicial Grandona -->
     <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
         <div class="logo-wrapper">
-            <!-- Verifique se o nome do seu arquivo de imagem é exatamente logo.jpg -->
             <img src="logo.jpg" alt="Kadoshflow Capa" onerror="this.onerror=null; this.src='Logo.jpg';">
         </div>
         <div class="significado-capa">
@@ -202,7 +201,6 @@
     <div class="app-container" id="painelContainer">
         <div class="painel-acesso">
             
-            <!-- FORMULÁRIO DE ENTRAR -->
             <div id="formEntrar">
                 <h2>Kadoshflow</h2>
                 <div class="sub-significado">Consagrado e Separado</div>
@@ -224,7 +222,6 @@
                 </div>
             </div>
 
-            <!-- FORMULÁRIO DE CADASTRO / INSCRIÇÃO -->
             <div id="formCadastro" class="escondido">
                 <h2>Criar Conta Gratuita</h2>
                 <div class="sub-significado">Consagrado e Separado</div>
@@ -260,7 +257,6 @@
         function alternarTela(tipo) {
             const fEntrar = document.getElementById('formEntrar');
             const fCadastro = document.getElementById('formCadastro');
-
             if(tipo === 'cadastro') {
                 fEntrar.classList.add('escondido');
                 fCadastro.classList.remove('escondido');
@@ -279,16 +275,13 @@
                 alert("Por favor, preencha todos os campos.");
                 return;
             }
-
             if(senha !== confirma) {
                 alert("As senhas não coincidem.");
                 return;
             }
-
             localStorage.setItem('kadoshflow_email', email);
             localStorage.setItem('kadoshflow_senha', senha);
             localStorage.setItem('kadoshflow_status_vip', 'nao');
-
             alert("Inscrição realizada com sucesso!");
             window.location.href = 'vitrine.html';
         }
@@ -296,12 +289,10 @@
         function realizarLogin() {
             const email = document.getElementById('loginEmail').value.trim();
             const senha = document.getElementById('loginSenha').value;
-
             if(!email || !senha) {
                 alert("Digite seu e-mail e senha.");
                 return;
             }
-
             localStorage.setItem('kadoshflow_email', email);
             window.location.href = 'vitrine.html';
         }

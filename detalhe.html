@@ -59,23 +59,23 @@
         h2.titulo-vip {
             text-align: center;
             color: var(--cor-ouro-claro);
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 20px;
         }
 
-        /* Seleção de Planos (Etapas) */
+        /* Planos atualizados */
         .planos-grid {
-            display: flex;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
             gap: 10px;
             margin-bottom: 20px;
         }
 
         .plano-card {
-            flex: 1;
             background-color: var(--cor-card);
             border: 2px solid var(--cor-borda);
             border-radius: 10px;
-            padding: 12px 8px;
+            padding: 12px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s;
@@ -87,9 +87,9 @@
         }
 
         .plano-card h4 {
-            font-size: 13px;
+            font-size: 12px;
             color: var(--cor-texto-suave);
-            margin-bottom: 5px;
+            margin-bottom: 4px;
         }
 
         .plano-card .preco {
@@ -98,7 +98,6 @@
             color: var(--cor-ouro-claro);
         }
 
-        /* Benefícios */
         .beneficios-lista {
             background-color: var(--cor-card);
             border-radius: 12px;
@@ -113,14 +112,13 @@
             gap: 12px;
             padding: 10px 0;
             border-bottom: 1px solid var(--cor-borda);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .beneficio-item:last-child {
             border-bottom: none;
         }
 
-        /* Seção de Pagamento com Banco Compacto */
         .pagamento-secao {
             background-color: var(--cor-card);
             border-radius: 12px;
@@ -149,7 +147,6 @@
             cursor: pointer;
         }
 
-        /* Botão Final */
         .botao-torne-se-vip {
             width: 100%;
             background: linear-gradient(135deg, #f59e0b, #d97706);
@@ -165,11 +162,41 @@
             margin-bottom: 15px;
         }
 
-        .botao-torne-se-vip:hover {
-            opacity: 0.95;
+        /* Modal PIX / QR Code */
+        .modal-pix {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.8);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
         }
 
-        /* Menu Inferior Fixo */
+        .modal-pix-conteudo {
+            background: #ffffff;
+            color: #0f172a;
+            width: 100%;
+            max-width: 380px;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+        }
+
+        .qrcode-box {
+            background: #f1f5f9;
+            border: 2px dashed #cbd5e1;
+            padding: 20px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 14px;
+            border-radius: 8px;
+        }
+
         .menu-inferior {
             display: flex;
             justify-content: space-around;
@@ -210,62 +237,51 @@
 
             <h2 class="titulo-vip">Torne-se VIP para acessar todos os benefícios exclusivos</h2>
 
-            <!-- Escolha de Planos (Etapas) -->
+            <!-- Planos com novos períodos e valores -->
             <div class="planos-grid">
-                <div class="plano-card" onclick="selecionarPlano(this)">
-                    <h4>Básico</h4>
+                <div class="plano-card" onclick="selecionarPlano(this, 'Semanal', 'R$ 4,00')">
+                    <h4>Semanal</h4>
                     <div class="preco">R$ 4,00</div>
                 </div>
-                <div class="plano-card" onclick="selecionarPlano(this)">
-                    <h4>Devocional</h4>
+                <div class="plano-card" onclick="selecionarPlano(this, 'Quinzenal', 'R$ 10,30')">
+                    <h4>Quinzenal</h4>
                     <div class="preco">R$ 10,30</div>
                 </div>
-                <div class="plano-card ativo" onclick="selecionarPlano(this)">
-                    <h4>Master VIP</h4>
-                    <div class="preco">R$ 16,00</div>
+                <div class="plano-card ativo" onclick="selecionarPlano(this, 'Mensal', 'R$ 18,00')">
+                    <h4>Mensal</h4>
+                    <div class="preco">R$ 18,00</div>
+                </div>
+                <div class="plano-card" onclick="selecionarPlano(this, 'Anual', 'R$ 120,00')">
+                    <h4>Anual</h4>
+                    <div class="preco">R$ 120,00</div>
                 </div>
             </div>
 
-            <!-- Benefícios -->
             <div class="beneficios-lista">
-                <div class="beneficio-item">
-                    <span>📺</span> Qualidade de exibição HD e 1080p
-                </div>
-                <div class="beneficio-item">
-                    <span>🚫</span> Sem anúncios incômodos
-                </div>
-                <div class="beneficio-item">
-                    <span>📚</span> Todos os livros inclusos (do começo ao fim)
-                </div>
-                <div class="beneficio-item">
-                    <span>✝️</span> Acesso a devocionais e materiais de EBD
-                </div>
-                <div class="beneficio-item">
-                    <span>⭐</span> Pontos e estrelas VIP diárias
-                </div>
+                <div class="beneficio-item"><span>📺</span> Qualidade de exibição HD e 1080p</div>
+                <div class="beneficio-item"><span>🚫</span> Sem anúncios incômodos</div>
+                <div class="beneficio-item"><span>📚</span> Todos os livros inclusos (do começo ao fim)</div>
+                <div class="beneficio-item"><span>✝️</span> Acesso a devocionais e materiais de EBD</div>
+                <div class="beneficio-item"><span>⭐</span> Pontos e estrelas VIP diárias</div>
             </div>
 
-            <!-- Método de Pagamento com Seleção de Banco Compacta -->
             <div class="pagamento-secao">
-                <label for="bancoSelect">Selecione o Banco / Forma de Pagamento:</label>
+                <label for="bancoSelect">Selecione a Forma de Pagamento / Banco:</label>
                 <select id="bancoSelect" class="select-banco">
-                    <option value="pix">PIX (Aprovação Instantânea)</option>
-                    <option value="cartao">Cartão de Crédito / GPay</option>
+                    <option value="pix">PIX (Aprovação Instantânea com QR Code)</option>
+                    <option value="cartao">Cartão de Crédito</option>
                     <option value="mercadopago">Mercado Pago</option>
-                    <option value="bancodobrasil">Banco do Brasil</option>
-                    <option value="bradesco">Bradesco</option>
-                    <option value="itau">Itaú</option>
-                    <option value="santander">Santander</option>
+                    <option value="bb">Banco do Brasil</option>
                     <option value="caixa">Caixa Econômica Federal</option>
+                    <option value="itau">Itaú</option>
+                    <option value="bradesco">Bradesco</option>
                 </select>
             </div>
 
-            <!-- Botão Principal -->
-            <button class="botao-torne-se-vip" onclick="realizarAssinatura()">Tornar VIP</button>
+            <button class="botao-torne-se-vip" onclick="processarPagamentoVIP()">Tornar VIP</button>
 
         </div>
 
-        <!-- Menu de Navegação Inferior -->
         <div class="menu-inferior">
             <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
             <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
@@ -274,17 +290,51 @@
         </div>
     </div>
 
+    <!-- MODAL DE PAGAMENTO PIX / QR CODE -->
+    <div class="modal-pix" id="modalPix">
+        <div class="modal-pix-conteudo">
+            <h3 style="color: #1e3a8a; margin-bottom: 10px;">Pagamento PIX Kadoshflow</h3>
+            <p id="detalhePlanoEscolhido" style="font-size: 13px; color: #475569; margin-bottom: 15px;"></p>
+            <div class="qrcode-box">
+                [ QR CODE PIX SIMULADO ]<br>
+                <span style="font-size: 11px; font-weight: normal; color: #64748b;">Escaneie com o app do seu banco</span>
+            </div>
+            <button onclick="confirmarSucessoVIP()" style="width:100%; background:#16a34a; color:white; border:none; padding:12px; border-radius:8px; font-weight:bold; cursor:pointer; margin-bottom: 8px;">Já fiz o Pagamento</button>
+            <button onclick="fecharModalPix()" style="width:100%; background:#cbd5e1; border:none; padding:10px; border-radius:8px; cursor:pointer;">Cancelar</button>
+        </div>
+    </div>
+
     <script>
-        // Alternar seleção visual dos planos
-        function selecionarPlano(elemento) {
-            const cards = document.querySelectorAll('.plano-card');
-            cards.forEach(c => c.classList.remove('ativo'));
+        let planoSelecionadoNome = "Mensal";
+        let planoSelecionadoPreco = "R$ 18,00";
+
+        function selecionarPlano(elemento, nome, preco) {
+            document.querySelectorAll('.plano-card').forEach(c => c.classList.remove('ativo'));
             elemento.classList.add('ativo');
+            planoSelecionadoNome = nome;
+            planoSelecionadoPreco = preco;
         }
 
-        function realizarAssinatura() {
-            const bancoEscolhido = document.getElementById('bancoSelect').value;
-            alert("Redirecionando para o pagamento seguro via " + bancoEscolhido.toUpperCase() + ". Obrigado por apoiar o Kadoshflow!");
+        function processarPagamentoVIP() {
+            const banco = document.getElementById('bancoSelect').value;
+            if(banco === 'pix') {
+                document.getElementById('detalhePlanoEscolhido').textContent = `Plano ${planoSelecionadoNome} (${planoSelecionadoPreco}) via PIX`;
+                document.getElementById('modalPix').style.display = 'flex';
+            } else {
+                alert(`Redirecionando para processamento seguro via ${banco.toUpperCase()} (${planoSelecionadoPreco})...`);
+                localStorage.setItem('kadoshflow_status_vip', 'ativo');
+                window.location.href = 'vitrine.html';
+            }
+        }
+
+        function confirmarSucessoVIP() {
+            localStorage.setItem('kadoshflow_status_vip', 'ativo');
+            alert("Pagamento confirmado com sucesso! Bem-vindo ao VIP Master Kadoshflow.");
+            window.location.href = 'vitrine.html';
+        }
+
+        function fecharModalPix() {
+            document.getElementById('modalPix').style.display = 'none';
         }
     </script>
 </body>
