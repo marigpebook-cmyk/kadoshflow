@@ -3,51 +3,289 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Detalhes</title>
+    <title>Kadoshflow - Área VIP</title>
     <style>
-:root {
---cor-principal: #1e3a8a;   /* Azul-marinho principal elegante /
---cor-secundaria: #0f172a;  / Azul-marinho bem escuro para títulos fortes /
---cor-fundo: #f0f4f8;       / Cinza levemente azulado (fundo moderno e limpo) /
---cor-card: #ffffff;        / Branco puro para os blocos /
---cor-borda: #cbd5e1;       / Cinza suave para contornos e separações /
---cor-vip: #d97706;         / Dourado elegante para áreas VIP /
---cor-admin: #047857;       / Verde profissional para o painel admin */
-        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
-        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
-        .cabecalho-livro { display: flex; gap: 12px; margin-bottom: 15px; align-items: center; }
-        .capa-detalhe { width: 90px; height: 130px; background: #e2d2cc; border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 11px; font-weight: bold; color: var(--cor-secundaria); text-align: center; padding: 5px; }
-        .lista-capitulos { margin-top: 15px; border-top: 1px solid var(--cor-borda); padding-top: 10px; }
-        .item-capitulo { display: flex; justify-content: space-between; align-items: center; padding: 8px; border-bottom: 1px solid #f2ece9; font-size: 12px; cursor: pointer; }
-        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
-        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+        :root {
+            --cor-fundo: #0f172a;
+            --cor-card: #1e293b;
+            --cor-ouro: #d97706;
+            --cor-ouro-claro: #f59e0b;
+            --cor-texto: #f8fafc;
+            --cor-texto-suave: #94a3b8;
+            --cor-borda: #334155;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: var(--cor-texto);
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--cor-fundo);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding: 20px;
+        }
+
+        .topo-voltar {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 15px;
+        }
+
+        .topo-voltar button {
+            background: none;
+            border: none;
+            color: var(--cor-ouro-claro);
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        h2.titulo-vip {
+            text-align: center;
+            color: var(--cor-ouro-claro);
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        /* Seleção de Planos (Etapas) */
+        .planos-grid {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .plano-card {
+            flex: 1;
+            background-color: var(--cor-card);
+            border: 2px solid var(--cor-borda);
+            border-radius: 10px;
+            padding: 12px 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .plano-card.ativo {
+            border-color: var(--cor-ouro-claro);
+            background-color: #27272a;
+        }
+
+        .plano-card h4 {
+            font-size: 13px;
+            color: var(--cor-texto-suave);
+            margin-bottom: 5px;
+        }
+
+        .plano-card .preco {
+            font-size: 15px;
+            font-weight: bold;
+            color: var(--cor-ouro-claro);
+        }
+
+        /* Benefícios */
+        .beneficios-lista {
+            background-color: var(--cor-card);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--cor-borda);
+        }
+
+        .beneficio-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--cor-borda);
+            font-size: 14px;
+        }
+
+        .beneficio-item:last-child {
+            border-bottom: none;
+        }
+
+        /* Seção de Pagamento com Banco Compacto */
+        .pagamento-secao {
+            background-color: var(--cor-card);
+            border-radius: 12px;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: 1px solid var(--cor-borda);
+        }
+
+        .pagamento-secao label {
+            display: block;
+            font-size: 13px;
+            color: var(--cor-texto-suave);
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .select-banco {
+            width: 100%;
+            padding: 12px;
+            background-color: #0f172a;
+            color: var(--cor-texto);
+            border: 1px solid var(--cor-ouro);
+            border-radius: 8px;
+            font-size: 14px;
+            outline: none;
+            cursor: pointer;
+        }
+
+        /* Botão Final */
+        .botao-torne-se-vip {
+            width: 100%;
+            background: linear-gradient(135deg, #f59e0b, #d97706);
+            color: #000;
+            border: none;
+            padding: 15px;
+            border-radius: 30px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(217, 119, 6, 0.3);
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .botao-torne-se-vip:hover {
+            opacity: 0.95;
+        }
+
+        /* Menu Inferior Fixo */
+        .menu-inferior {
+            display: flex;
+            justify-content: space-around;
+            background-color: var(--cor-card);
+            border-top: 1px solid var(--cor-borda);
+            padding: 12px 0;
+            position: sticky;
+            bottom: 0;
+            margin: -20px -20px 0 -20px;
+        }
+
+        .menu-item {
+            background: none;
+            border: none;
+            color: var(--cor-texto-suave);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .menu-item.ativo {
+            color: var(--cor-ouro-claro);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Voltar</button>
-    <div class="cabecalho-livro">
-        <div class="capa-detalhe">Capa</div>
-        <div>
-            <h3 style="color: var(--cor-secundaria); margin: 0 0 5px 0; font-size: 15px;">Amor no Altar</h3>
-            <p style="font-size: 11px; color: var(--cor-principal); font-weight: bold; margin: 0 0 5px 0;">Por: Sara Lima</p>
-            <p style="font-size: 11px; color: #555; margin: 0;">Romance cristão emocionante.</p>
+
+    <div class="app-container">
+        <div class="conteudo-principal">
+            
+            <div class="topo-voltar">
+                <button onclick="window.location.href='vitrine.html'">❮ Voltar</button>
+            </div>
+
+            <h2 class="titulo-vip">Torne-se VIP para acessar todos os benefícios exclusivos</h2>
+
+            <!-- Escolha de Planos (Etapas) -->
+            <div class="planos-grid">
+                <div class="plano-card" onclick="selecionarPlano(this)">
+                    <h4>Básico</h4>
+                    <div class="preco">R$ 4,00</div>
+                </div>
+                <div class="plano-card" onclick="selecionarPlano(this)">
+                    <h4>Devocional</h4>
+                    <div class="preco">R$ 10,30</div>
+                </div>
+                <div class="plano-card ativo" onclick="selecionarPlano(this)">
+                    <h4>Master VIP</h4>
+                    <div class="preco">R$ 16,00</div>
+                </div>
+            </div>
+
+            <!-- Benefícios -->
+            <div class="beneficios-lista">
+                <div class="beneficio-item">
+                    <span>📺</span> Qualidade de exibição HD e 1080p
+                </div>
+                <div class="beneficio-item">
+                    <span>🚫</span> Sem anúncios incômodos
+                </div>
+                <div class="beneficio-item">
+                    <span>📚</span> Todos os livros inclusos (do começo ao fim)
+                </div>
+                <div class="beneficio-item">
+                    <span>✝️</span> Acesso a devocionais e materiais de EBD
+                </div>
+                <div class="beneficio-item">
+                    <span>⭐</span> Pontos e estrelas VIP diárias
+                </div>
+            </div>
+
+            <!-- Método de Pagamento com Seleção de Banco Compacta -->
+            <div class="pagamento-secao">
+                <label for="bancoSelect">Selecione o Banco / Forma de Pagamento:</label>
+                <select id="bancoSelect" class="select-banco">
+                    <option value="pix">PIX (Aprovação Instantânea)</option>
+                    <option value="cartao">Cartão de Crédito / GPay</option>
+                    <option value="mercadopago">Mercado Pago</option>
+                    <option value="bancodobrasil">Banco do Brasil</option>
+                    <option value="bradesco">Bradesco</option>
+                    <option value="itau">Itaú</option>
+                    <option value="santander">Santander</option>
+                    <option value="caixa">Caixa Econômica Federal</option>
+                </select>
+            </div>
+
+            <!-- Botão Principal -->
+            <button class="botao-torne-se-vip" onclick="realizarAssinatura()">Tornar VIP</button>
+
+        </div>
+
+        <!-- Menu de Navegação Inferior -->
+        <div class="menu-inferior">
+            <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
+            <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
+            <button class="menu-item ativo" onclick="window.location.href='detalhe.html'">👑 VIP</button>
+            <button class="menu-item" onclick="window.location.href='admin.html'">👤 Perfil</button>
         </div>
     </div>
-    <div style="display: flex; gap: 8px;">
-        <button class="botao-acao" onclick="window.location.href='leitura.html'">Ler Amostra (Até Pág. 7)</button>
-        <button class="botao-acao" style="background: var(--cor-vip);" onclick="window.location.href='carteira.html'">👑 Desbloquear Completo</button>
-    </div>
-    <div class="lista-capitulos">
-        <div class="item-capitulo" onclick="window.location.href='leitura.html'">
-            <span>📖 Páginas 1 a 7 (Grátis)</span>
-            <span style="color: green; font-weight: bold;">Disponível</span>
-        </div>
-        <div class="item-capitulo" onclick="window.location.href='carteira.html'">
-            <span>🔒 Páginas 8 em diante (Completo / VIP)</span>
-            <span style="color: var(--cor-vip); font-weight: bold;">Assinar / Comprar</span>
-        </div>
-    </div>
-</div>
+
+    <script>
+        // Alternar seleção visual dos planos
+        function selecionarPlano(elemento) {
+            const cards = document.querySelectorAll('.plano-card');
+            cards.forEach(c => c.classList.remove('ativo'));
+            elemento.classList.add('ativo');
+        }
+
+        function realizarAssinatura() {
+            const bancoEscolhido = document.getElementById('bancoSelect').value;
+            alert("Redirecionando para o pagamento seguro via " + bancoEscolhido.toUpperCase() + ". Obrigado por apoiar o Kadoshflow!");
+        }
+    </script>
 </body>
 </html>

@@ -3,33 +3,202 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - VIP e Carteira</title>
+    <title>Kadoshflow - Minhas Compras e Biblioteca</title>
     <style>
         :root {
-            --cor-principal: #8c6d78;
-            --cor-secundaria: #5a4a53;
-            --cor-fundo: #fbf8f6;
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-fundo: #f8fafc;
             --cor-card: #ffffff;
-            --cor-borda: #e8d7d1;
-            --cor-vip: #c5a880;
+            --cor-borda: #e2e8f0;
+            --cor-destaque: #7c3aed;
         }
-        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
-        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
-        .card-pagamento { background: #fbf8f6; padding: 12px; border-radius: 8px; border: 1px solid var(--cor-borda); margin-bottom: 10px; }
-        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
-        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px;
+            background-color: var(--cor-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .conteudo-principal {
+            padding: 20px;
+            flex: 1;
+        }
+
+        .topo-pagina {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            border-bottom: 1px solid var(--cor-borda);
+            padding-bottom: 12px;
+        }
+
+        .topo-pagina h2 {
+            color: var(--cor-principal);
+            font-size: 20px;
+        }
+
+        /* Abas internas */
+        .abas-secao {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        .aba-btn {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid var(--cor-borda);
+            background-color: #f1f5f9;
+            border-radius: 8px;
+            font-weight: bold;
+            font-size: 13px;
+            cursor: pointer;
+            color: #64748b;
+            text-align: center;
+        }
+
+        .aba-btn.ativo {
+            background-color: var(--cor-principal);
+            color: white;
+            border-color: var(--cor-principal);
+        }
+
+        /* Lista de itens */
+        .lista-compras {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .card-compra {
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 10px;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .info-livro h4 {
+            color: var(--cor-secundaria);
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+
+        .info-livro p {
+            color: #64748b;
+            font-size: 12px;
+        }
+
+        .btn-ler-livro {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 8px 14px;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* Menu Inferior Fixo */
+        .menu-inferior {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ffffff;
+            border-top: 1px solid var(--cor-borda);
+            padding: 12px 0;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .menu-item {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .menu-item.ativo {
+            color: var(--cor-principal);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Voltar à Vitrine</button>
-    <h3 style="color: var(--cor-secundaria); margin-top: 0; font-size: 15px;">👑 Área VIP & Carteira</h3>
-    <div class="card-pagamento">
-        <strong>Plano Membro VIP Cristão (Mensal)</strong>
-        <p style="font-size: 11px; color: #555; margin: 4px 0;">Acesso liberado a todos os livros e EBD.</p>
-        <button class="botao-acao" style="background: var(--cor-vip);" onclick="alert('Gerando QR Code PIX...')">⚡ Pagar com PIX</button>
-        <button class="botao-acao" style="margin-top: 5px;" onclick="alert('Abrindo tela de Cartão...')">💳 Pagar com Cartão</button>
+
+    <div class="app-container">
+        <div class="conteudo-principal">
+            
+            <div class="topo-pagina">
+                <h2>Minhas Compras Kadosh</h2>
+                <button onclick="window.location.href='vitrine.html'" style="background:none; border:none; cursor:pointer; color:var(--cor-principal); font-weight:bold;">Voltar</button>
+            </div>
+
+            <!-- Abas -->
+            <div class="abas-secao">
+                <button class="aba-btn ativo">Meus Livros</button>
+                <button class="aba-btn">Materiais</button>
+            </div>
+
+            <!-- Lista de Livros Adquiridos -->
+            <div class="lista-compras">
+                <div class="card-compra">
+                    <div class="info-livro">
+                        <h4>Caminho da Luz</h4>
+                        <p>Autor: Felipe • Adquirido</p>
+                    </div>
+                    <button class="btn-ler-livro" onclick="window.location.href='leitura.html'">Ler</button>
+                </div>
+
+                <div class="card-compra">
+                    <div class="info-livro">
+                        <h4>Amor no Altar</h4>
+                        <p>Autor: MaryG • Adquirido</p>
+                    </div>
+                    <button class="btn-ler-livro" onclick="window.location.href='leitura.html'">Ler</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Menu de Navegação Inferior (Corrigido e Funcional) -->
+        <div class="menu-inferior">
+            <button class="menu-item ativo" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
+            <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
+            <button class="menu-item" onclick="window.location.href='detalhe.html'">👑 VIP</button>
+            <button class="menu-item" onclick="window.location.href='admin.html'">👤 Perfil</button>
+        </div>
     </div>
-</div>
+
 </body>
 </html>
+

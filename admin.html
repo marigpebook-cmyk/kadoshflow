@@ -3,47 +3,503 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Painel Admin</title>
+    <title>Kadoshflow - Meu Perfil</title>
     <style>
         :root {
-            --cor-principal: #8c6d78;
-            --cor-secundaria: #5a4a53;
-            --cor-fundo: #fbf8f6;
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-adm: #b91c1c;
+            --cor-fundo: #f8fafc;
             --cor-card: #ffffff;
-            --cor-borda: #e8d7d1;
-            --cor-admin: #155724;
+            --cor-borda: #e2e8f0;
+            --cor-destaque: #7c3aed;
         }
-        body { font-family: Arial, sans-serif; background-color: var(--cor-fundo); color: #333; margin: 0; padding: 15px; }
-        .app-container { max-width: 500px; margin: 0 auto; background: var(--cor-card); padding: 20px; border-radius: 16px; box-shadow: 0 6px 20px rgba(140, 109, 120, 0.12); border: 1px solid var(--cor-borda); }
-        .card-admin { background: #fbf8f6; padding: 12px; border-radius: 8px; border: 1px solid var(--cor-borda); margin-bottom: 10px; }
-        .input-admin { width: 100%; padding: 6px; margin: 4px 0 8px 0; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 12px; }
-        .botao-voltar { background: none; border: none; color: var(--cor-principal); font-weight: bold; cursor: pointer; font-size: 13px; margin-bottom: 10px; }
-        .botao-acao { background-color: var(--cor-principal); color: white; border: none; padding: 6px 10px; border-radius: 4px; font-weight: bold; cursor: pointer; font-size: 11px; width: 100%; margin-top: 6px; }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .app-container {
+            width: 100%;
+            max-width: 480px; /* Estilo aplicativo mobile/tablet */
+            background-color: var(--cor-card);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        }
+
+        .conteudo-principal {
+            padding: 20px;
+            flex: 1;
+            overflow-y: auto;
+            padding-bottom: 40px;
+        }
+
+        /* Topo com Configurações e Mensagens */
+        .topo-botoes {
+            display: flex;
+            justify-content: flex-end;
+            gap: 15px;
+            margin-bottom: 15px;
+            font-size: 20px;
+        }
+
+        .topo-botoes span {
+            cursor: pointer;
+        }
+
+        /* Perfil do Usuário */
+        .perfil-topo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .foto-avatar {
+            width: 65px;
+            height: 65px;
+            background: linear-gradient(135deg, #7c3aed, #1e3a8a);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 26px;
+            font-weight: bold;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        }
+
+        .info-usuario h3 {
+            font-size: 18px;
+            color: var(--cor-secundaria);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .tag-pseudonimo {
+            background-color: #ede9fe;
+            color: var(--cor-destaque);
+            font-size: 11px;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .info-usuario p {
+            font-size: 13px;
+            color: #64748b;
+            margin-top: 3px;
+        }
+
+        /* Estatísticas (Seguidores, Curtidas, Visitantes) */
+        .estatisticas-box {
+            display: flex;
+            justify-content: space-around;
+            background-color: #f8fafc;
+            border: 1px solid var(--cor-borda);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .estat-item span {
+            display: block;
+            font-size: 16px;
+            font-weight: bold;
+            color: var(--cor-secundaria);
+        }
+
+        .estat-item label {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* Bloco da Carteira */
+        .carteira-card {
+            background: linear-gradient(135deg, #f3e8ff, #ede9fe);
+            border: 1px solid #d8b4fe;
+            border-radius: 15px;
+            padding: 15px;
+            margin-bottom: 25px;
+        }
+
+        .carteira-topo {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .carteira-topo span {
+            font-weight: bold;
+            color: var(--cor-destaque);
+            font-size: 14px;
+        }
+
+        .btn-recarregar {
+            background-color: var(--cor-destaque);
+            color: white;
+            border: none;
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .carteira-valores {
+            display: flex;
+            justify-content: space-around;
+            text-align: center;
+        }
+
+        .valor-item b {
+            font-size: 16px;
+            color: var(--cor-secundaria);
+            display: block;
+        }
+
+        .valor-item span {
+            font-size: 11px;
+            color: #64748b;
+        }
+
+        /* Lista de Opções do Menu */
+        .menu-opcoes {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .opcao-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 10px;
+            border-bottom: 1px solid var(--cor-borda);
+            cursor: pointer;
+            font-size: 14px;
+            color: var(--cor-secundaria);
+            background: none;
+            border-top: none;
+            border-left: none;
+            border-right: none;
+            width: 100%;
+            text-align: left;
+        }
+
+        .opcao-item:hover {
+            background-color: #f1f5f9;
+            border-radius: 8px;
+        }
+
+        .opcao-item span {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        /* Formulário Inscrição Escritor (Modal/Oculto) */
+        .modal-escritor {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 20px;
+        }
+
+        .modal-conteudo {
+            background: white;
+            width: 100%;
+            max-width: 450px;
+            padding: 25px;
+            border-radius: 15px;
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-conteudo h3 {
+            color: var(--cor-principal);
+            margin-bottom: 15px;
+        }
+
+        .form-grupo {
+            margin-bottom: 12px;
+        }
+
+        .form-grupo label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        .form-grupo input, .form-grupo textarea {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--cor-borda);
+            border-radius: 6px;
+            font-size: 13px;
+        }
+
+        /* Painel Admin Vermelho (Discreto) */
+        .btn-admin-secreto {
+            background: none;
+            border: none;
+            color: var(--cor-adm);
+            font-size: 12px;
+            cursor: pointer;
+            margin-top: 30px;
+            width: 100%;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .painel-adm {
+            background-color: #fef2f2;
+            border: 2px solid var(--cor-adm);
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 15px;
+            display: none;
+        }
+
+        /* Menu Inferior Fixo */
+        .menu-inferior {
+            display: flex;
+            justify-content: space-around;
+            background-color: #ffffff;
+            border-top: 1px solid var(--cor-borda);
+            padding: 12px 0;
+            position: sticky;
+            bottom: 0;
+        }
+
+        .menu-item {
+            background: none;
+            border: none;
+            color: #64748b;
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .menu-item.ativo {
+            color: var(--cor-principal);
+            font-weight: bold;
+        }
     </style>
 </head>
 <body>
-<div class="app-container">
-    <button class="botao-voltar" onclick="window.location.href='vitrine.html'">← Sair do Painel Admin</button>
-    <h3 style="color: var(--cor-admin); margin-top: 0; font-size: 15px;">🔒 Painel de Controle da Gestora (Admin)</h3>
-    <p style="font-size: 11px; color: #666;">Aqui você altera valores, gerencia contas e aprova/recusa obras.</p>
-    
-    <div class="card-admin">
-        <strong>⚙️ Alterar Valores de Venda / VIP</strong>
-        <label style="font-size: 11px; display:block; margin-top:6px;">Preço do Plano VIP Mensal (R$):</label>
-        <input type="text" class="input-admin" value="19,90">
-        <label style="font-size: 11px; display:block;">Preço Padrão Livro Avulso (R$):</label>
-        <input type="text" class="input-admin" value="14,90">
-        <button class="botao-acao" style="background: var(--cor-admin);" onclick="alert('Valores atualizados com sucesso no sistema!')">💾 Salvar Novos Valores</button>
-    </div>
 
-    <div class="card-admin">
-        <strong>✍️ Obras Enviadas por Escritores (Aprovação)</strong>
-        <p style="font-size: 11px; color: #555; margin: 4px 0;">Obra: "Caminho de Luz" (Por Autor Parceiro)</p>
-        <div style="display: flex; gap: 6px; margin-top: 6px;">
-            <button class="botao-acao" style="background: #2e7d32;" onclick="alert('Obra aprovada e publicada na Vitrine!')">✔️ Aceitar e Publicar</button>
-            <button class="botao-acao" style="background: #c62828;" onclick="alert('Obra recusada.')">❌ Recusar</button>
+    <div class="app-container">
+        <div class="conteudo-principal">
+            
+            <!-- Topo com Atalhos -->
+            <div class="topo-botoes">
+                <span title="Mensagens">✉️</span>
+                <span title="Configurações">⚙️</span>
+            </div>
+
+            <!-- Perfil do Usuário -->
+            <div class="perfil-topo">
+                <div class="foto-avatar" id="avatarLetra">M</div>
+                <div class="info-usuario">
+                    <h3 id="nomeUsuario">Marilan <span class="tag-pseudonimo">MaryG</span></h3>
+                    <p id="emailUsuario">carregando...</p>
+                </div>
+            </div>
+
+            <!-- Estatísticas (Seguidores, Curtidas, Visitantes) -->
+            <div class="estatisticas-box">
+                <div class="estat-item">
+                    <span>12</span>
+                    <label>Seguidores</label>
+                </div>
+                <div class="estat-item">
+                    <span>48</span>
+                    <label>Curtidas</label>
+                </div>
+                <div class="estat-item">
+                    <span>156</span>
+                    <label>Visitantes</label>
+                </div>
+            </div>
+
+            <!-- Seção da Carteira -->
+            <div class="carteira-card">
+                <div class="carteira-topo">
+                    <span>CARTEIRA KADOSH</span>
+                    <button class="btn-recarregar" onclick="alert('Funcionalidade de recarga de créditos em breve!')">Recarregar</button>
+                </div>
+                <div class="carteira-valores">
+                    <div class="valor-item">
+                        <b>🪙 0</b>
+                        <span>Moedas</span>
+                    </div>
+                    <div class="valor-item">
+                        <b>🎁 0</b>
+                        <span>Bônus</span>
+                    </div>
+                    <div class="valor-item">
+                        <b>⭐ 10</b>
+                        <span>Estrelas</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Menu de Opções Personalizadas -->
+            <div class="menu-opcoes">
+                <button class="opcao-item" onclick="abrirInscricaoEscritor()">
+                    <span>✍️ Ser um Escritor Kadosh</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Seus cupons e cartões premiados.')">
+                    <span>🎟️ Cartão Premiado / Cupons</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Digite ou resgate seu código de estrelas adquiridas.')">
+                    <span>⭐ Código de Resgate / Estrelas</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Lista de amigos e escritores que você segue.')">
+                    <span>👥 Seguindo & Amigos</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Suas compras literárias e materiais salvos.')">
+                    <span>📚 Minhas Compras Kadosh</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Área de suporte e FAQ para tirar dúvidas.')">
+                    <span>💬 Tirar suas Dúvidas (Suporte)</span> ➔
+                </button>
+                <button class="opcao-item" onclick="alert('Idioma padrão: Português (Brasil)')">
+                    <span>🌐 Língua & Preferência</span> ➔
+                </button>
+            </div>
+
+            <!-- Acesso Restrito da Gestora (Admin - Vermelho) -->
+            <button class="btn-admin-secreto" onclick="acessarAdminVermelho()">🔒 Painel Exclusivo da Gestora (Admin)</button>
+
+            <div class="painel-adm" id="painelVermelho">
+                <h4 style="color: var(--cor-adm); margin-bottom: 10px;">🔴 Painel de Gestão Kadoshflow</h4>
+                <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 10px;">Apenas obras originais são permitidas. Plágio é proibido.</p>
+                <label style="font-size: 12px; font-weight: bold;">Valor Assinatura VIP:</label>
+                <input type="text" value="R$ 19,90" style="width:100%; padding:8px; margin-top:4px; border:1px solid #fca5a5; border-radius:5px;">
+                <button onclick="alert('Alterações salvas com sucesso!')" style="background:var(--cor-adm); color:white; border:none; padding:8px 15px; margin-top:10px; border-radius:5px; font-weight:bold; cursor:pointer;">Salvar</button>
+            </div>
+
+        </div>
+
+        <!-- Menu de Navegação Inferior -->
+        <div class="menu-inferior">
+            <button class="menu-item" onclick="window.location.href='carteira.html'">📚 Biblioteca</button>
+            <button class="menu-item" onclick="window.location.href='vitrine.html'">🏠 Início</button>
+            <button class="menu-item" onclick="window.location.href='detalhe.html'">👑 VIP</button>
+            <button class="menu-item ativo" onclick="window.location.href='admin.html'">👤 Perfil</button>
         </div>
     </div>
-</div>
+
+    <!-- MODAL DE INSCRIÇÃO PARA ESCRITOR KADOSH -->
+    <div class="modal-escritor" id="modalEscritor">
+        <div class="modal-conteudo">
+            <h3>Inscrição - Escritor Kadosh</h3>
+            <p style="font-size: 12px; color: #64748b; margin-bottom: 15px;">Preencha seus dados para publicar obras 100% originais em nossa plataforma.</p>
+            
+            <div class="form-grupo">
+                <label>Nome Completo</label>
+                <input type="text" placeholder="Seu nome completo">
+            </div>
+            <div class="form-grupo">
+                <label>Pseudônimo (Nome Artístico)</label>
+                <input type="text" placeholder="Ex: MaryG">
+            </div>
+            <div class="form-grupo">
+                <label>E-mail de Contato</label>
+                <input type="email" id="emailEscritorInput" placeholder="seu@email.com">
+            </div>
+            <div class="form-grupo">
+                <label>CPF</label>
+                <input type="text" placeholder="000.000.000-00">
+            </div>
+            <div class="form-grupo">
+                <label>Endereço Completo com CEP</label>
+                <textarea placeholder="Rua, número, bairro, cidade - CEP"></textarea>
+            </div>
+            <div class="form-grupo">
+                <label>Envio de Documento com Foto (RG / CNH)</label>
+                <input type="file" accept="image/*">
+            </div>
+
+            <div style="display: flex; gap: 10px; margin-top: 15px;">
+                <button onclick="enviarInscricaoEscritor()" style="flex:1; background:var(--cor-principal); color:white; border:none; padding:10px; border-radius:6px; font-weight:bold; cursor:pointer;">Enviar Inscrição</button>
+                <button onclick="fecharInscricaoEscritor()" style="background:#cbd5e1; border:none; padding:10px 15px; border-radius:6px; cursor:pointer;">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Carrega dados do usuário logado
+        window.onload = function() {
+            const emailSalvo = localStorage.getItem('kadoshflow_email');
+            if(emailSalvo) {
+                document.getElementById('emailUsuario').textContent = emailSalvo;
+                const inicial = emailSalvo.charAt(0).toUpperCase();
+                document.getElementById('avatarLetra').textContent = inicial;
+                document.getElementById('nomeUsuario').innerHTML = emailSalvo.split('@')[0] + ' <span class="tag-pseudonimo">MaryG</span>';
+                document.getElementById('emailEscritorInput').value = emailSalvo;
+            } else {
+                document.getElementById('emailUsuario').textContent = "visitante@kadoshflow.com";
+                document.getElementById('avatarLetra').textContent = "V";
+            }
+        };
+
+        // Funções do Modal de Escritor
+        function abrirInscricaoEscritor() {
+            document.getElementById('modalEscritor').style.display = 'flex';
+        }
+
+        function fecharInscricaoEscritor() {
+            document.getElementById('modalEscritor').style.display = 'none';
+        }
+
+        function enviarInscricaoEscritor() {
+            alert("Inscrição para Escritor Kadosh enviada com sucesso! Analisaremos seus dados e sua documentação.");
+            fecharInscricaoEscritor();
+        }
+
+        // Acesso Gestora Admin Vermelho
+        function acessarAdminVermelho() {
+            const senha = prompt("Digite a senha exclusiva da Gestora:");
+            if(senha === "1234") {
+                document.getElementById('painelVermelho').style.display = "block";
+                alert("Painel da Gestora ativado!");
+            } else if(senha !== null) {
+                alert("Senha incorreta.");
+            }
+        }
+    </script>
 </body>
 </html>
+
