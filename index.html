@@ -22,10 +22,9 @@
             height: 100%;
             font-family: Arial, sans-serif;
             background-color: #0f172a;
-            overflow: hidden;
         }
 
-        /* Capa Inicial de Apresentação */
+        /* Capa Inicial de Entrada */
         .tela-capa {
             position: fixed;
             top: 0;
@@ -48,13 +47,12 @@
             justify-content: center;
             align-items: center;
             width: 100%;
-            max-width: 450px;
-            max-height: 70vh;
+            max-width: 500px;
         }
 
         .logo-wrapper img {
             width: 100%;
-            height: 100%;
+            max-height: 70vh;
             object-fit: contain;
             border-radius: 12px;
         }
@@ -68,31 +66,32 @@
 
         .significado-capa h3 {
             color: #f8fafc;
-            font-size: 16px;
+            font-size: 18px;
             margin-bottom: 4px;
             letter-spacing: 1px;
         }
 
         .significado-capa p {
-            font-size: 13px;
+            font-size: 14px;
             color: #38bdf8;
             font-style: italic;
         }
 
         .legenda-capa {
-            color: #64748b;
+            color: #cbd5e1;
             width: 100%;
-            padding: 10px;
+            padding: 15px;
             text-align: center;
-            font-size: 13px;
-            letter-spacing: 1.5px;
+            font-size: 14px;
+            font-weight: bold;
+            background: rgba(15, 23, 42, 0.9);
         }
 
         .esconder-capa {
             display: none !important;
         }
 
-        /* Painel de Login / Cadastro */
+        /* Painel de Login e Inscrição */
         .app-container {
             width: 100%;
             height: 100vh;
@@ -109,7 +108,7 @@
             background-color: #ffffff;
             padding: 30px;
             border-radius: 15px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             text-align: center;
             border: 1px solid #cbd5e1;
         }
@@ -121,7 +120,7 @@
         }
 
         .sub-significado {
-            font-size: 12px;
+            font-size: 13px;
             color: #0284c7;
             font-style: italic;
             margin-bottom: 20px;
@@ -155,6 +154,7 @@
             background-color: var(--cor-principal);
             color: white;
             border: none;
+            print-color-adjust: exact;
             padding: 12px;
             font-size: 16px;
             font-weight: bold;
@@ -167,7 +167,7 @@
             margin-top: 20px;
             display: flex;
             flex-direction: column;
-            gap: 10px;
+            gap: 12px;
             font-size: 14px;
         }
 
@@ -175,30 +175,34 @@
             color: var(--cor-principal);
             font-weight: bold;
             cursor: pointer;
+            text-decoration: underline;
         }
 
         .escondido {
-            display: none;
+            display: none !important;
         }
     </style>
 </head>
 <body>
 
-    <!-- Capa Inicial de Entrada -->
+    <!-- Capa Inicial com Logo e Significado -->
     <div class="tela-capa" id="telaCapa" onclick="entrarNoApp()">
         <div class="logo-wrapper">
-            <img src="logo.jpg" alt="Kadoshflow Capa">
+            <!-- Verifique se o nome do seu arquivo de imagem é exatamente logo.jpg -->
+            <img src="logo.jpg" alt="Kadoshflow Capa" onerror="this.onerror=null; this.src='Logo.jpg';">
         </div>
         <div class="significado-capa">
             <h3>KADOSHFLOW</h3>
             <p>Consagrado e Separado</p>
         </div>
-        <div class="legenda-capa">Toque na tela para entrar &bull; Leitura &bull; Materiais</div>
+        <div class="legenda-capa">Toque em qualquer lugar para entrar no App</div>
     </div>
 
-    <!-- Painel de Login -->
+    <!-- Painel de Login e Inscrição -->
     <div class="app-container" id="painelContainer">
         <div class="painel-acesso">
+            
+            <!-- FORMULÁRIO DE ENTRAR -->
             <div id="formEntrar">
                 <h2>Kadoshflow</h2>
                 <div class="sub-significado">Consagrado e Separado</div>
@@ -215,9 +219,36 @@
                 <button class="botao-acao" onclick="realizarLogin()">Entrar</button>
 
                 <div class="links-uteis">
-                    <span onclick="window.location.href='vitrine.html'">Pular direto para a Vitrine (Modo Visitante)</span>
+                    <span onclick="alternarTela('cadastro')">Ainda não tem conta? Inscrever-se</span>
+                    <span style="color: #64748b; font-weight: normal;" onclick="irParaVitrineLivre()">Pular para a Vitrine (Modo Visitante)</span>
                 </div>
             </div>
+
+            <!-- FORMULÁRIO DE CADASTRO / INSCRIÇÃO -->
+            <div id="formCadastro" class="escondido">
+                <h2>Criar Conta Gratuita</h2>
+                <div class="sub-significado">Consagrado e Separado</div>
+                
+                <div class="input-grupo">
+                    <label>E-mail</label>
+                    <input type="email" id="cadEmail" placeholder="seu@email.com">
+                </div>
+                <div class="input-grupo">
+                    <label>Criar Senha</label>
+                    <input type="password" id="cadSenha" placeholder="Sua senha">
+                </div>
+                <div class="input-grupo">
+                    <label>Confirmar Senha</label>
+                    <input type="password" id="cadConfirmaSenha" placeholder="Repita a senha">
+                </div>
+                
+                <button class="botao-acao" onclick="realizarCadastro()">Concluir Inscrição</button>
+
+                <div class="links-uteis">
+                    <span onclick="alternarTela('entrar')">Já tem uma conta? Entrar</span>
+                </div>
+            </div>
+
         </div>
     </div>
 
@@ -226,11 +257,56 @@
             document.getElementById('telaCapa').classList.add('esconder-capa');
         }
 
-        function realizarLogin() {
-            const email = document.getElementById('loginEmail').value;
-            if(email) {
-                localStorage.setItem('kadoshflow_email', email);
+        function alternarTela(tipo) {
+            const fEntrar = document.getElementById('formEntrar');
+            const fCadastro = document.getElementById('formCadastro');
+
+            if(tipo === 'cadastro') {
+                fEntrar.classList.add('escondido');
+                fCadastro.classList.remove('escondido');
+            } else {
+                fCadastro.classList.add('escondido');
+                fEntrar.classList.remove('escondido');
             }
+        }
+
+        function realizarCadastro() {
+            const email = document.getElementById('cadEmail').value.trim();
+            const senha = document.getElementById('cadSenha').value;
+            const confirma = document.getElementById('cadConfirmaSenha').value;
+
+            if(!email || !senha || !confirma) {
+                alert("Por favor, preencha todos os campos.");
+                return;
+            }
+
+            if(senha !== confirma) {
+                alert("As senhas não coincidem.");
+                return;
+            }
+
+            localStorage.setItem('kadoshflow_email', email);
+            localStorage.setItem('kadoshflow_senha', senha);
+            localStorage.setItem('kadoshflow_status_vip', 'nao');
+
+            alert("Inscrição realizada com sucesso!");
+            window.location.href = 'vitrine.html';
+        }
+
+        function realizarLogin() {
+            const email = document.getElementById('loginEmail').value.trim();
+            const senha = document.getElementById('loginSenha').value;
+
+            if(!email || !senha) {
+                alert("Digite seu e-mail e senha.");
+                return;
+            }
+
+            localStorage.setItem('kadoshflow_email', email);
+            window.location.href = 'vitrine.html';
+        }
+
+        function irParaVitrineLivre() {
             window.location.href = 'vitrine.html';
         }
     </script>
