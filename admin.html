@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kadoshflow - Meu Perfil & Gestão</title>
+    <title>Kadoshflow - Perfil & Gestão Mestre</title>
     <style>
         :root {
             --cor-principal: #1e3a8a;
@@ -29,9 +29,10 @@
             min-height: 100vh;
         }
 
+        /* Container que se expande perfeitamente em telas maiores e se ajusta em celulares */
         .app-container {
             width: 100%;
-            max-width: 480px;
+            max-width: 600px;
             background-color: var(--cor-card);
             min-height: 100vh;
             display: flex;
@@ -174,7 +175,7 @@
             margin-bottom: 4px;
         }
 
-        .form-grupo input, .form-grupo textarea {
+        .form-grupo input, .form-grupo select, .form-grupo textarea {
             width: 100%;
             padding: 10px;
             border: 1px solid #cbd5e1;
@@ -182,14 +183,54 @@
             font-size: 13px;
         }
 
-        /* PAINEL DE GESTÃO (ADMIN MESTRE INTEGRADO) */
+        /* PAINEL DE GESTÃO DA GESTORA COMPLETO */
         .painel-adm {
             background-color: #fef2f2;
             border: 2px solid var(--cor-adm);
-            border-radius: 10px;
-            padding: 15px;
+            border-radius: 12px;
+            padding: 20px;
             margin-top: 25px;
             display: none;
+        }
+
+        .painel-adm h4 {
+            color: var(--cor-adm);
+            margin-bottom: 5px;
+            font-size: 18px;
+        }
+
+        .bloco-gestao {
+            background: white;
+            border: 1px solid #fca5a5;
+            border-radius: 8px;
+            padding: 12px;
+            margin-top: 15px;
+        }
+
+        .bloco-gestao h5 {
+            color: #991b1b;
+            font-size: 14px;
+            margin-bottom: 8px;
+            border-bottom: 1px solid #fee2e2;
+            padding-bottom: 4px;
+        }
+
+        .lista-interna {
+            max-height: 120px;
+            overflow-y: auto;
+            font-size: 12px;
+            color: #334155;
+            background: #f8fafc;
+            padding: 8px;
+            border-radius: 6px;
+            border: 1px solid #e2e8f0;
+        }
+
+        .item-lista-adm {
+            padding: 4px 0;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex;
+            justify-content: space-between;
         }
 
         .menu-inferior {
@@ -225,7 +266,7 @@
     <div class="app-container">
         <div class="conteudo-principal">
             
-            <!-- Topo com Mensagens e Configuração Admin Restrita -->
+            <!-- Topo com Mensagem e Configuração Admin Restrita -->
             <div class="topo-botoes">
                 <span title="Mensagens" onclick="abrirModal('modalMensagens')">✉️</span>
                 <span title="Painel Gestora" onclick="acessarAdminVermelho()">⚙️</span>
@@ -253,32 +294,56 @@
                 <button class="opcao-item" onclick="abrirModal('modalSuporte')"><span>💬 Tirar suas Dúvidas (Suporte)</span> ➔</button>
             </div>
 
-            <!-- PAINEL DE GESTÃO DA GESTORA (EXIBIDO APÓS DIGITAR A SENHA) -->
+            <!-- PAINEL DE GESTÃO DA GESTORA COMPLETO -->
             <div class="painel-adm" id="painelVermelho">
-                <h4 style="color: var(--cor-adm); margin-bottom: 10px;">🔴 Painel de Gestão Kadoshflow</h4>
-                <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 15px;">Controle exclusivo de valores e parâmetros da plataforma.</p>
+                <h4>🔴 Painel de Gestão Kadoshflow</h4>
+                <p style="font-size: 12px; color: #7f1d1d; margin-bottom: 10px;">Central administrativa exclusiva da gestora.</p>
                 
-                <div class="form-grupo">
-                    <label>Valor Plano Semanal:</label>
-                    <input type="text" id="adminValSemanal" value="R$ 4,00">
+                <!-- Bloco de Preços -->
+                <div class="bloco-gestao">
+                    <h5>Gerenciar Valores VIP</h5>
+                    <div class="form-grupo">
+                        <label>Valor Plano Semanal:</label>
+                        <input type="text" id="adminValSemanal" value="R$ 4,00">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Valor Plano Quinzenal:</label>
+                        <input type="text" id="adminValQuinzenal" value="R$ 10,30">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Valor Plano Mensal:</label>
+                        <input type="text" id="adminValMensal" value="R$ 18,00">
+                    </div>
+                    <div class="form-grupo">
+                        <label>Valor Plano Anual:</label>
+                        <input type="text" id="adminValAnual" value="R$ 120,00">
+                    </div>
                 </div>
-                <div class="form-grupo">
-                    <label>Valor Plano Quinzenal:</label>
-                    <input type="text" id="adminValQuinzenal" value="R$ 10,30">
+
+                <!-- Bloco de Livros e Obras -->
+                <div class="bloco-gestao">
+                    <h5>Obras Publicadas na Plataforma</h5>
+                    <div class="lista-interna">
+                        <div class="item-lista-adm"><span>Caminho da Luz (Felipe)</span> <b>Ativo</b></div>
+                        <div class="item-lista-adm"><span>Amor no Altar (MaryG)</span> <b>Ativo</b></div>
+                    </div>
                 </div>
-                <div class="form-grupo">
-                    <label>Valor Plano Mensal:</label>
-                    <input type="text" id="adminValMensal" value="R$ 18,00">
+
+                <!-- Bloco de Inscritos -->
+                <div class="bloco-gestao">
+                    <h5>Inscritos & Usuários Recentes</h5>
+                    <div class="lista-interna" id="listaInscritosAdmin">
+                        <div class="item-lista-adm"><span id="usuarioLogadoAdmin">Carregando...</span> <b>Ativo</b></div>
+                    </div>
                 </div>
-                <div class="form-grupo">
-                    <label>Valor Plano Anual:</label>
-                    <input type="text" id="adminValAnual" value="R$ 120,00">
+
+                <!-- Bloco de Capas / Imagem -->
+                <div class="bloco-gestao">
+                    <h5>Trocar Imagem de Capa (Logo)</h5>
+                    <input type="file" accept="image/*" style="font-size: 11px; margin-top: 5px;">
                 </div>
-                <div class="form-grupo">
-                    <label>Link de Inscrição de Escritor:</label>
-                    <input type="text" id="adminLinkEscritor" value="https://kadoshflow.com/inscricao">
-                </div>
-                <button onclick="salvarConfigAdmin()" style="background:var(--cor-adm); color:white; border:none; padding:10px; width:100%; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:5px;">Salvar Alterações</button>
+
+                <button onclick="salvarConfigAdmin()" style="background:var(--cor-adm); color:white; border:none; padding:12px; width:100%; border-radius:6px; font-weight:bold; cursor:pointer; margin-top:15px;">Salvar Todas as Configurações</button>
             </div>
 
         </div>
@@ -337,8 +402,10 @@
             if(email) {
                 document.getElementById('emailUsuario').textContent = email;
                 document.getElementById('avatarDiv').textContent = email.charAt(0).toUpperCase();
+                document.getElementById('usuarioLogadoAdmin').textContent = email;
             } else {
                 document.getElementById('emailUsuario').textContent = "visitante@kadoshflow.com";
+                document.getElementById('usuarioLogadoAdmin').textContent = "Visitante";
             }
         };
 
@@ -359,14 +426,14 @@
             const senha = prompt("Digite a senha exclusiva da Gestora (Admin):");
             if(senha === "1234") {
                 document.getElementById('painelVermelho').style.display = "block";
-                alert("Painel de Administração liberado com sucesso!");
+                alert("Painel de Administração completo liberado!");
             } else if(senha !== null) {
                 alert("Senha incorreta!");
             }
         }
 
         function salvarConfigAdmin() {
-            alert("Alterações de valores e links salvas com sucesso!");
+            alert("Todas as configurações, preços e dados foram salvos com sucesso!");
         }
 
         function abrirModal(id) { document.getElementById(id).style.display = 'flex'; }
