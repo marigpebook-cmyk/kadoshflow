@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadoshflow - Painel Mestre de Gestão</title>
+    <style>
+        :root {
+            --cor-principal: #1e3a8a;
+            --cor-secundaria: #0f172a;
+            --cor-adm: #b91c1c;
+            --cor-fundo: #f8fafc;
+            --cor-card: #ffffff;
+            --cor-borda: #cbd5e1;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: var(--cor-fundo);
+            color: #333;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 10px;
+        }
+
+        /* Container Universal que se adapta a Celular, Tablet e PC */
+        .painel-mestre-container {
+            width: 100%;
+            max-width: 1200px; /* Expande no PC e encolhe perfeitamente no celular/tablet */
+            background-color: var(--cor-card);
+            min-height: 95vh;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border: 1px solid var(--cor-borda);
+        }
+
+        .cabecalho-mestre {
+            background-color: var(--cor-secundaria);
+            color: white;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .cabecalho-mestre h2 {
+            font-size: 20px;
+            color: #f8fafc;
+        }
+
+        .botoes-topo-mestre {
+            display: flex;
+            gap: 10px;
+        }
+
+        .botoes-topo-mestre button {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        .botoes-topo-mestre button:hover {
+            opacity: 0.9;
+        }
+
+        .conteudo-mestre {
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            flex: 1;
+            overflow-y: auto;
+        }
+
+        .cartao-bloco {
+            background-color: #f1f5f9;
+            border: 1px solid var(--cor-borda);
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .cartao-bloco h3 {
+            color: var(--cor-principal);
+            font-size: 16px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid var(--cor-principal);
+            padding-bottom: 6px;
+        }
+
+        .form-grupo-mestre {
+            margin-bottom: 12px;
+        }
+
+        .form-grupo-mestre label {
+            display: block;
+            font-size: 12px;
+            font-weight: bold;
+            color: #475569;
+            margin-bottom: 4px;
+        }
+
+        .form-grupo-mestre input, .form-grupo-mestre select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--cor-borda);
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .btn-acao-mestre {
+            background-color: var(--cor-principal);
+            color: white;
+            border: none;
+            padding: 10px;
+            border-radius: 6px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 5px;
+        }
+
+        .btn-acao-mestre:hover {
+            opacity: 0.9;
+        }
+
+        /* Lista de Inscritos / Livros */
+        .lista-dados {
+            background: white;
+            border: 1px solid var(--cor-borda);
+            border-radius: 6px;
+            padding: 10px;
+            max-height: 150px;
+            overflow-y: auto;
+            font-size: 13px;
+            color: #334155;
+        }
+
+        .item-lista {
+            padding: 6px 0;
+            border-bottom: 1px solid #f1f5f9;
+            display: flex;
+            justify-content: space-between;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="painel-mestre-container">
+        <!-- Cabeçalho do Painel Mestre -->
+        <div class="cabecalho-mestre">
+            <h2>⚙️ Kadoshflow - Painel de Controle Mestre (Gestora)</h2>
+            <div class="botoes-topo-mestre">
+                <button onclick="window.location.href='vitrine.html'">Ver App (Vitrine)</button>
+                <button onclick="window.location.href='index.html'">Sair para Início</button>
+            </div>
+        </div>
+
+        <!-- Conteúdo Dividido em Blocos Responsivos -->
+        <div class="conteudo-mestre">
+            
+            <!-- Bloco 1: Gestão de Valores e Assinaturas VIP -->
+            <div class="cartao-bloco">
+                <div>
+                    <h3>👑 Gerenciar Valores VIP</h3>
+                    <div class="form-grupo-mestre">
+                        <label>Valor Plano Semanal:</label>
+                        <input type="text" id="valSemanal" value="R$ 4,00">
+                    </div>
+                    <div class="form-grupo-mestre">
+                        <label>Valor Plano Quinzenal:</label>
+                        <input type="text" id="valQuinzenal" value="R$ 10,30">
+                    </div>
+                    <div class="form-grupo-mestre">
+                        <label>Valor Plano Mensal:</label>
+                        <input type="text" id="valMensal" value="R$ 18,00">
+                    </div>
+                    <div class="form-grupo-mestre">
+                        <label>Valor Plano Anual:</label>
+                        <input type="text" id="valAnual" value="R$ 120,00">
+                    </div>
+                </div>
+                <button class="btn-acao-mestre" onclick="salvarValoresVIP()">Salvar Alterações de Preço</button>
+            </div>
+
+            <!-- Bloco 2: Visualizar Livros e Obras -->
+            <div class="cartao-bloco">
+                <div>
+                    <h3>📚 Livros na Plataforma</h3>
+                    <div class="lista-dados">
+                        <div class="item-lista"><span>Caminho da Luz (Felipe)</span> <b>Ativo</b></div>
+                        <div class="item-lista"><span>Amor no Altar (MaryG)</span> <b>Ativo</b></div>
+                    </div>
+                </div>
+                <button class="btn-acao-mestre" onclick="window.location.href='vitrine.html'">Gerenciar Vitrine / Obras</button>
+            </div>
+
+            <!-- Bloco 3: Visualizar Inscritos e Escritores -->
+            <div class="cartao-bloco">
+                <div>
+                    <h3>👥 Usuários & Inscritos</h3>
+                    <div class="lista-dados" id="listaInscritosPainel">
+                        <div class="item-lista"><span id="usuarioCadastradoNome">Carregando...</span> <b>Inscrito</b></div>
+                    </div>
+                </div>
+                <button class="btn-acao-mestre" onclick="alert('Exportando lista de inscritos...')">Exportar Dados</button>
+            </div>
+
+            <!-- Bloco 4: Configuração de Capas e Imagens -->
+            <div class="cartao-bloco">
+                <div>
+                    <h3>🖼️ Gerenciar Capas / Logos</h3>
+                    <div class="form-grupo-mestre">
+                        <label>Trocar Imagem de Capa (Logo Principal):</label>
+                        <input type="file" accept="image/*" onchange="alert('Nova capa carregada com sucesso para o sistema!')">
+                    </div>
+                    <p style="font-size: 11px; color: #64748b; margin-top: 8px;">A imagem enviada substituirá instantaneamente a tela de entrada do aplicativo em qualquer dispositivo.</p>
+                </div>
+                <button class="btn-acao-mestre" onclick="alert('Configuração de capa aplicada!')">Aplicar Capa</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // Carregar dados salvos no navegador para exibição rápida no painel
+        window.onload = function() {
+            const emailSalvo = localStorage.getItem('kadoshflow_email');
+            if(emailSalvo) {
+                document.getElementById('usuarioCadastradoNome').textContent = emailSalvo;
+            } else {
+                document.getElementById('usuarioCadastradoNome').textContent = "Nenhum usuário logado recentemente";
+            }
+        };
+
+        function salvarValoresVIP() {
+            alert("Valores dos planos VIP atualizados com sucesso em toda a plataforma!");
+        }
+    </script>
+</body>
+</html>
