@@ -6,73 +6,113 @@
     <title>Painel do Escritor - Kadosh</title>
     <style>
         body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }
-        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
-        h1, h2 { color: #2c3e50; }
-        .info-box { background: #e8f4fd; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 20px; border-radius: 4px; }
+        .container { max-width: 950px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #1b263b; }
+        .topo-voltar { margin-bottom: 15px; display: inline-block; color: #3a86ff; text-decoration: none; font-weight: bold; }
+        
+        .info-box { background: #e8f4fd; padding: 15px; border-left: 4px solid #3a86ff; margin-bottom: 20px; border-radius: 4px; }
+        
+        .secao-card { background: #fafafa; border: 1px solid #ddd; padding: 20px; border-radius: 6px; margin-bottom: 20px; }
+        
         .form-group { margin-bottom: 15px; }
-        label { display: block; font-weight: bold; margin-bottom: 5px; }
-        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
-        textarea { height: 250px; resize: vertical; background: #fffdf0; border-left: 4px solid #f39c12; } /* Estilo Caderneta de Anotações */
-        button { background: #27ae60; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
-        button:hover { background: #219653; }
-        .btn-simular { background: #f39c12; margin-bottom: 20px; }
-        .btn-simular:hover { background: #d68910; }
-        .voltar { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #3498db; font-weight: bold; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; font-size: 14px; }
+        input[type="text"], textarea, select { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        
+        /* Caderneta de Anotações estilo rascunho literário */
+        textarea.caderneta { height: 250px; background: #fffdf0; border-left: 4px solid #f39c12; font-family: monospace; font-size: 14px; }
+        
+        .botoes-acao { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 15px; }
+        button { background: #3a86ff; color: white; border: none; padding: 10px 18px; font-size: 14px; border-radius: 4px; cursor: pointer; font-weight: bold; }
+        button:hover { background: #2667cc; }
+        
+        .btn-publicar { background: #27ae60; }
+        .btn-publicar:hover { background: #219653; }
+        .btn-contrato { background: #e67e22; }
+        .btn-contrato:hover { background: #d35400; }
+
+        .carteira-escritor { background: #eef9f2; border: 1px solid #c8e6c9; padding: 15px; border-radius: 6px; margin-bottom: 20px; }
     </style>
 </head>
 <body>
 
 <div class="container">
-    <a href="vitrine.html" class="voltar">← Voltar para a Vitrine</a>
+    <a href="index.html" class="topo-voltar">← Voltar para a Vitrine (Início)</a>
     <h1>Painel do Escritor</h1>
     
-    <button class="btn-simular" onclick="ativarTesteEscritor()">Simular Acesso de Teste</button>
-
     <div class="info-box">
-        <p><strong>Status:</strong> <span id="statusEscritor">Aguardando liberação</span></p>
-        <p><strong>Código de Escritor (Padrão Oficial):</strong> <span id="codigoEscritor">---</span></p>
+        <p><strong>Status:</strong> Escritor Registrado na Plataforma</p>
+        <p><strong>Código de Acesso Oficial:</strong> <span id="codigoEscritor" style="color: #d97000; font-weight: bold;">1234 / A</span></p>
     </div>
 
-    <!-- Caderneta de Escrita do Escritor -->
-    <div id="cadernetaEscrita" style="display: none;">
-        <h2>Caderneta de Anotações e Escrita de Obras</h2>
-        <p>Escreva os capítulos do seu livro como em um caderno de notas digital.</p>
+    <!-- Carteira do Escritor -->
+    <div class="carteira-escritor">
+        <h3>💰 Carteira do Escritor (Ganhos e Vendas)</h3>
+        <p>Saldo Disponível para Saque/Pix: <strong>R$ 0,00</strong></p>
+        <button onclick="alert('Solicitando saque via Pix para a conta cadastrada...')">Solicitar Saque / Pix</button>
+    </div>
+
+    <!-- Caderneta de Anotações e Escrita de Obras -->
+    <div class="secao-card">
+        <h2>Caderneta de Anotações e Escrita</h2>
+        <p style="font-size: 13px; color: #666;">Escreva seus capítulos, desenvolva sua história e organize seus rascunhos em formato de caderno.</p>
         
-        <form onsubmit="publicarTexto(event)">
-            <div class="form-group">
-                <label for="tituloLivro">Título do Livro:</label>
-                <input type="text" id="tituloLivro" required placeholder="Ex: O Casamento de Contrato dos Herdeiros">
-            </div>
-            
-            <div class="form-group">
-                <label for="capituloLivro">Capítulo:</label>
-                <input type="text" id="capituloLivro" required placeholder="Ex: Capítulo 1">
-            </div>
+        <div class="form-group">
+            <label>Título da Obra:</label>
+            <input type="text" id="tituloObra" placeholder="Ex: O Trono de Cristal e Sangue">
+        </div>
+        
+        <div class="form-group">
+            <label>Capítulo ou Seção:</label>
+            <input type="text" id="capituloObra" placeholder="Ex: Capítulo 1 - O Despertar">
+        </div>
 
-            <div class="form-group">
-                <label for="textoRascunho">Caderneta de Texto (Escreva sua história aqui):</label>
-                <textarea id="textoRascunho" required placeholder="Comece a escrever sua obra literária..."></textarea>
-            </div>
+        <div class="form-group">
+            <label>Caderneta de Texto (Escreva sua história aqui):</label>
+            <textarea class="caderneta" placeholder="Escreva os detalhes, rascunhos e capítulos da sua obra literária..."></textarea>
+        </div>
 
-            <button type="submit">Publicar Obra</button>
-        </form>
+        <div class="botoes-acao">
+            <button class="btn-publicar" onclick="acaoPublicar('capitulo')">Salvar / Publicar Capítulo</button>
+            <button class="btn-publicar" onclick="acaoPublicar('vender_livro')">Vender Livro Completo</button>
+            <button class="btn-contrato" onclick="acaoContrato()">Pedir Contrato de Edição/Venda</button>
+        </div>
+    </div>
+
+    <!-- Mensagens e Suporte Geral (Leitores e Administrador) -->
+    <div class="secao-card">
+        <h2>Mensagens e Suporte</h2>
+        <p style="font-size: 13px; color: #666;">Canal de comunicação direta com leitores e com o administrador mestre.</p>
+        <div style="background: white; border: 1px solid #ddd; padding: 12px; height: 120px; overflow-y: auto; margin-bottom: 10px;" id="caixaMensagens">
+            <p style="color: #888; font-style: italic;">Nenhuma mensagem nova no momento.</p>
+        </div>
+        <input type="text" id="textoMensagem" placeholder="Escreva uma mensagem para o suporte ou leitor...">
+        <button style="margin-top: 10px;" onclick="enviarMensagemEscritor()">Enviar Mensagem</button>
     </div>
 </div>
 
 <script>
-    function ativarTesteEscritor() {
-        const codigoOficial = "1234 / A"; // Regra oficial de códigos
-        document.getElementById('statusEscritor').innerHTML = '<strong style="color: green;">Aprovado (Modo de Teste)</strong>';
-        document.getElementById('codigoEscritorinnerText' || 'codigoEscritor').innerText = codigoOficial;
-        document.getElementById('cadernetaEscrita').style.display = 'block';
-        alert(`Acesso liberado! Seu código de escritor gerado é: ${codigoOficial}`);
+    function acaoPublicar(tipo) {
+        const titulo = document.getElementById('tituloObra').value || "Sua Obra";
+        if(tipo === 'vender_livro') {
+            alert(`Solicitação enviada! O livro "${titulo}" foi configurado para venda completa na plataforma.`);
+        } else {
+            alert(`Capítulo de "${titulo}" salvo e publicado com sucesso na caderneta e vitrine!`);
+        }
     }
 
-    function publicarTexto(event) {
-        event.preventDefault();
-        const titulo = document.getElementById('tituloLivro').value;
-        alert(`Obra "${titulo}" salva e publicada com sucesso na plataforma!`);
-        document.getElementById('textoRascunho').value = "";
+    function acaoContrato() {
+        alert("Solicitação de contrato enviada para o Admin Mestre com sucesso! O administrador avaliará os termos para a publicação oficial e comercialização.");
+    }
+
+    function enviarMensagemEscritor() {
+        const txt = document.getElementById('textoMensagem').value;
+        if(txt.trim() !== "") {
+            const caixa = document.getElementById('caixaMensagens');
+            if(caixa.innerHTML.includes("Nenhuma mensagem nova")) caixa.innerHTML = "";
+            caixa.innerHTML += `<p><strong>Você:</strong> ${txt}</p>`;
+            document.getElementById('textoMensagem').value = "";
+            alert("Mensagem enviada com sucesso!");
+        }
     }
 </script>
 
