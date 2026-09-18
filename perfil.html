@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kadosh - Plataforma</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 0; background: #fff5f0; color: #333; padding-bottom: 70px; }
+        
+        /* Topo do Perfil */
+        .perfil-header { background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%); padding: 25px 20px; display: flex; align-items: center; justify-content: space-between; border-bottom-left-radius: 20px; border-bottom-right-radius: 20px; }
+        .usuario-info { display: flex; align-items: center; gap: 15px; }
+        .avatar { width: 60px; height: 60px; background: #ff8b94; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px; font-weight: bold; }
+        .btn-entrar { background: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; color: #ff6b6b; cursor: pointer; box-shadow: 0 2px 5px rgba(0,0,0,0.1); }
+
+        /* Card da Carteira */
+        .carteira-card { background: white; margin: 15px; padding: 15px 20px; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .carteira-header { display: flex; justify-content: space-between; align-items: center; font-weight: bold; margin-bottom: 10px; }
+        .carteira-valores { display: flex; justify-content: space-between; align-items: center; }
+        .btn-recarregar { background: #ff6b6b; color: white; border: none; padding: 8px 18px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        /* Centro de Assinaturas VIP */
+        .vip-banner { background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%); color: white; margin: 15px; padding: 15px; border-radius: 12px; display: flex; justify-content: space-between; align-items: center; }
+        .btn-vip { background: #f39c12; color: white; border: none; padding: 8px 20px; border-radius: 20px; font-weight: bold; cursor: pointer; }
+
+        /* Lista de Opções */
+        .menu-lista { background: white; margin: 15px; border-radius: 12px; padding: 0 15px; box-shadow: 0 2px 8px rgba(0,0,0,0.05); }
+        .menu-item { display: flex; justify-content: space-between; align-items: center; padding: 15px 0; border-bottom: 1px solid #f1f1f1; cursor: pointer; font-size: 15px; }
+        .menu-item:last-child { border-bottom: none; }
+
+        /* Barra de Navegação Inferior */
+        nav.bottom-bar { position: fixed; bottom: 0; left: 0; width: 100%; background: white; display: flex; justify-content: space-around; padding: 10px 0; border-top: 1px solid #ddd; box-shadow: 0 -2px 5px rgba(0,0,0,0.05); }
+        .nav-item { text-align: center; font-size: 11px; color: #666; text-decoration: none; cursor: pointer; }
+        .nav-item.ativo { color: #ff6b6b; font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <!-- Cabeçalho do Perfil -->
+    <div class="perfil-header">
+        <div class="usuario-info">
+            <div class="avatar">V</div>
+            <div>
+                <h2 style="margin: 0; font-size: 18px;">Visitante</h2>
+                <span style="font-size: 12px; color: #555;">ID: 126690250</span>
+            </div>
+        </div>
+        <button class="btn-entrar" onclick="alert('Indo para tela de Login / Cadastro')">Entrar</button>
+    </div>
+
+    <!-- Seção da Carteira (Pix, Recarga, Moedas) -->
+    <div class="carteira-card">
+        <div class="carteira-header">
+            <span>Minha Carteira</span>
+            <span style="color: #007bff; font-size: 13px; cursor: pointer;" onclick="window.location.href='carteira.html'">Detalhes &gt;</span>
+        </div>
+        <div class="carteira-valores">
+            <div>
+                <h3 style="margin: 0; font-size: 18px;">0</h3>
+                <span style="font-size: 12px; color: #777;">Moedas</span>
+            </div>
+            <div>
+                <h3 style="margin: 0; font-size: 18px;">0</h3>
+                <span style="font-size: 12px; color: #777;">Bônus</span>
+            </div>
+            <button class="btn-recarregar" onclick="alert('Abrindo opções de pagamento via Pix / Recarga')">Recarregar</button>
+        </div>
+    </div>
+
+    <!-- Centro de Assinaturas (VIP / EBD / Semanal / Mensal) -->
+    <div class="vip-banner">
+        <div>
+            <strong style="font-size: 14px;">💎 Centro de Assinaturas</strong>
+            <p style="margin: 5px 0 0 0; font-size: 11px; color: #ddd;">Mais benefícios do que a recarga avulsa</p>
+        </div>
+        <button class="btn-vip" onclick="alert('Abrindo planos VIP e EBD')">IR</button>
+    </div>
+
+    <!-- Menu de Navegação do Perfil -->
+    <div class="menu-lista">
+        <div class="menu-item" onclick="alert('Inserir Código de Resgate')">
+            <span>🎁 Código de Resgate</span> &gt;
+        </div>
+        <div class="menu-item" onclick="window.location.href='painel-escritor.html'">
+            <span>✍️ Para Autores (Painel de Escrita)</span> &gt;
+        </div>
+        <div class="menu-item" onclick="alert('Painel de Bônus')">
+            <span>🔥 Ganhe bônus</span> &gt;
+        </div>
+        <div class="menu-item" onclick="window.location.href='detalhe.html'">
+            <span>📚 Histórico / Minhas Compras</span> &gt;
+        </div>
+        <div class="menu-item" onclick="alert('Suporte e Mensagens')">
+            <span>💬 Suporte ao cliente</span> &gt;
+        </div>
+        <div class="menu-item" onclick="window.location.href='admin-mestre.html'" style="color: #c0392b; font-weight: bold;">
+            <span>🛡️ Painel Admin Mestre (Gestão)</span> &gt;
+        </div>
+    </div>
+
+    <!-- Barra de Navegação Inferior -->
+    <nav class="bottom-bar">
+        <a class="nav-item" onclick="alertIndo('Biblioteca')">📖<br>Biblioteca</a>
+        <a class="nav-item" onclick="window.location.href='index.html'">🏠<br>Início</a>
+        <a class="nav-item" onclick="alertIndo('Curtas')">📑<br>Curtas</a>
+        <a class="nav-item" onclick="alertIndo('Rank')">🏆<br>Rank</a>
+        <a class="nav-item ativo">👤<br>Perfil</a>
+    </nav>
+
+<script>
+    function alertIndo(secao) {
+        alert(`Navegando para a seção: ${secao}`);
+    }
+</script>
+
+</body>
+</html>
