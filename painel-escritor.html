@@ -3,288 +3,78 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Painel do Escritor - KadoshFlow</title>
+    <title>Painel do Escritor - Kadosh</title>
     <style>
-        :root {
-            --primary-color: #ff4b6e;
-            --secondary-color: #2b2b3c;
-            --bg-color: #f7f8fc;
-            --card-bg: #ffffff;
-            --text-color: #333333;
-            --border-color: #e0e0e0;
-        }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-
-        body {
-            background-color: var(--bg-color);
-            color: var(--text-color);
-            display: flex;
-            height: 100vh;
-            overflow: hidden;
-        }
-
-        /* Menu Lateral */
-        aside {
-            width: 250px;
-            background-color: var(--secondary-color);
-            color: white;
-            display: flex;
-            flex-direction: column;
-            padding: 20px;
-        }
-
-        aside h2 {
-            font-size: 1.2rem;
-            margin-bottom: 30px;
-            color: var(--primary-color);
-            text-align: center;
-        }
-
-        aside nav a {
-            color: #b0b0c0;
-            text-decoration: none;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 8px;
-            display: block;
-            transition: 0.3s;
-        }
-
-        aside nav a:hover, aside nav a.active {
-            background-color: var(--primary-color);
-            color: white;
-        }
-
-        /* Área Principal */
-        main {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            overflow-y: auto;
-            padding: 30px;
-        }
-
-        header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-        }
-
-        header h1 {
-            font-size: 1.5rem;
-            color: var(--secondary-color);
-        }
-
-        .btn {
-            background-color: var(--primary-color);
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: 0.2s;
-        }
-
-        .btn:hover {
-            opacity: 0.9;
-        }
-
-        .btn-secondary {
-            background-color: #e0e0e0;
-            color: #333;
-        }
-
-        /* Container dasAbas/Ferramentas */
-        .tab-content {
-            display: none;
-            background: var(--card-bg);
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-            flex: 1;
-            flex-direction: column;
-        }
-
-        .tab-content.active {
-            display: flex;
-        }
-
-        /* Estilo da Oficina de Escrita e Divisor */
-        textarea {
-            width: 100%;
-            height: 250px;
-            padding: 15px;
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            font-size: 1rem;
-            resize: vertical;
-            margin-bottom: 15px;
-            outline: none;
-        }
-
-        textarea:focus {
-            border-color: var(--primary-color);
-        }
-
-        .tools-bar {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            margin-bottom: 20px;
-        }
-
-        .word-counter {
-            font-size: 0.9rem;
-            color: #666;
-        }
-
-        /* Blocos Divididos (Resultado) */
-        .output-container {
-            margin-top: 15px;
-            max-height: 200px;
-            overflow-y: auto;
-            border: 1px dashed var(--border-color);
-            padding: 15px;
-            border-radius: 8px;
-            background: #fafafa;
-        }
-
-        .block-item {
-            background: white;
-            padding: 10px;
-            margin-bottom: 8px;
-            border-radius: 6px;
-            border-left: 4px solid var(--primary-color);
-            font-size: 0.9rem;
-        }
+        body { font-family: Arial, sans-serif; background-color: #f4f6f9; margin: 0; padding: 20px; color: #333; }
+        .container { max-width: 900px; margin: 0 auto; background: #fff; padding: 30px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        h1, h2 { color: #2c3e50; }
+        .info-box { background: #e8f4fd; padding: 15px; border-left: 4px solid #3498db; margin-bottom: 20px; border-radius: 4px; }
+        .form-group { margin-bottom: 15px; }
+        label { display: block; font-weight: bold; margin-bottom: 5px; }
+        input[type="text"], textarea { width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; }
+        textarea { height: 250px; resize: vertical; background: #fffdf0; border-left: 4px solid #f39c12; } /* Estilo Caderneta de Anotações */
+        button { background: #27ae60; color: white; border: none; padding: 12px 20px; font-size: 16px; border-radius: 4px; cursor: pointer; }
+        button:hover { background: #219653; }
+        .btn-simular { background: #f39c12; margin-bottom: 20px; }
+        .btn-simular:hover { background: #d68910; }
+        .voltar { display: inline-block; margin-bottom: 20px; text-decoration: none; color: #3498db; font-weight: bold; }
     </style>
 </head>
 <body>
 
-    <!-- MENU LATERAL -->
-    <aside>
-        <h2>KadoshFlow</h2>
-        <nav>
-            <a href="#" onclick="switchTab('oficina', event)" class="active">Oficina de Escrita</a>
-            <a href="#" onclick="switchTab('bloco', event)">Bloco de Notas</a>
-            <a href="#" onclick="switchTab('calendario', event)">Calendário & Frequência</a>
-        </nav>
-    </aside>
+<div class="container">
+    <a href="vitrine.html" class="voltar">← Voltar para a Vitrine</a>
+    <h1>Painel do Escritor</h1>
+    
+    <button class="btn-simular" onclick="ativarTesteEscritor()">Simular Acesso de Teste</button>
 
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main>
-        <header>
-            <h1 id="page-title">Oficina de Escrita (Divisor Inteligente)</h1>
-            <button class="btn">Salvar Alterações</button>
-        </header>
+    <div class="info-box">
+        <p><strong>Status:</strong> <span id="statusEscritor">Aguardando liberação</span></p>
+        <p><strong>Código de Escritor (Padrão Oficial):</strong> <span id="codigoEscritor">---</span></p>
+    </div>
 
-        <!-- ABA 1: OFICINA DE ESCRITA & DIVISOR (800 - 1200 palavras) -->
-        <div id="oficina" class="tab-content active">
-            <p style="margin-bottom: 15px; color: #666; font-size: 0.95rem;">
-                Cole seu texto completo abaixo. O sistema fatiará automaticamente a narrativa em blocos ideais entre 800 e 1.200 palavras para manter a leitura ágil.
-            </p>
-            <textarea id="texto-original" placeholder="Escreva ou cole seu capítulo completo aqui..." oninput="contarPalavras()"></textarea>
+    <!-- Caderneta de Escrita do Escritor -->
+    <div id="cadernetaEscrita" style="display: none;">
+        <h2>Caderneta de Anotações e Escrita de Obras</h2>
+        <p>Escreva os capítulos do seu livro como em um caderno de notas digital.</p>
+        
+        <form onsubmit="publicarTexto(event)">
+            <div class="form-group">
+                <label for="tituloLivro">Título do Livro:</label>
+                <input type="text" id="tituloLivro" required placeholder="Ex: O Casamento de Contrato dos Herdeiros">
+            </div>
             
-            <div class="tools-bar">
-                <button class="btn" onclick="dividirTexto()">Dividir em Blocos (800 - 1200 palavras)</button>
-                <button class="btn btn-secondary" onclick="limparTexto()">Descartar / Limpar</button>
-                <span class="word-counter" id="contador">0 palavras</span>
+            <div class="form-group">
+                <label for="capituloLivro">Capítulo:</label>
+                <input type="text" id="capituloLivro" required placeholder="Ex: Capítulo 1">
             </div>
 
-            <h3>Blocos Gerados para Publicação:</h3>
-            <div class="output-container" id="resultado-blocos">
-                <p style="color: #999; font-size: 0.9rem;">Nenhum bloco gerado ainda.</p>
+            <div class="form-group">
+                <label for="textoRascunho">Caderneta de Texto (Escreva sua história aqui):</label>
+                <textarea id="textoRascunho" required placeholder="Comece a escrever sua obra literária..."></textarea>
             </div>
-        </div>
 
-        <!-- ABA 2: BLOCO DE NOTAS LIVRE -->
-        <div id="bloco" class="tab-content">
-            <p style="margin-bottom: 15px; color: #666; font-size: 0.95rem;">
-                Espaço livre para anotações rápidas, ideias de enredo e lembretes pessoais do autor.
-            </p>
-            <textarea style="height: 400px;" placeholder="Digite suas anotações aqui..."></textarea>
-        </div>
+            <button type="submit">Publicar Obra</button>
+        </form>
+    </div>
+</div>
 
-        <!-- ABA 3: CALENDÁRIO DE FREQUÊNCIA -->
-        <div id="calendario" class="tab-content">
-            <h3>Controle de Presença e Ritmo</h3>
-            <p style="margin-top: 10px; color: #666;">
-                Aqui o sistema registra sua constância. Dias produtivos aparecem destacados, e dias de ausência indicam o alerta de pausa.
-            </p>
-            <!-- Simulação visual rápida do calendário -->
-            <div style="margin-top: 20px; display: flex; gap: 10px;">
-                <div style="padding: 15px; background: #e3f2fd; border: 2px solid #1976d2; border-radius: 8px; text-align: center;">
-                    <strong>Dia 14</strong><br><span style="font-size: 0.8rem; color: #1976d2;">Excelente</span>
-                </div>
-                <div style="padding: 15px; background: #ffebee; border: 2px solid #d32f2f; border-radius: 8px; text-align: center;">
-                    <strong>Dia 15</strong><br><span style="font-size: 0.8rem; color: #d32f2f;">Não compareceu</span>
-                </div>
-            </div>
-        </div>
-    </main>
+<script>
+    function ativarTesteEscritor() {
+        const codigoOficial = "1234 / A"; // Regra oficial de códigos
+        document.getElementById('statusEscritor').innerHTML = '<strong style="color: green;">Aprovado (Modo de Teste)</strong>';
+        document.getElementById('codigoEscritorinnerText' || 'codigoEscritor').innerText = codigoOficial;
+        document.getElementById('cadernetaEscrita').style.display = 'block';
+        alert(`Acesso liberado! Seu código de escritor gerado é: ${codigoOficial}`);
+    }
 
-    <script>
-        // Função para alternar abas do painel
-        function switchTab(tabId, event) {
-            document.querySelectorAll('.tab-content').forEach(tab => tab.classList.remove('active'));
-            document.querySelectorAll('aside nav a').forEach(link => link.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+    function publicarTexto(event) {
+        event.preventDefault();
+        const titulo = document.getElementById('tituloLivro').value;
+        alert(`Obra "${titulo}" salva e publicada com sucesso na plataforma!`);
+        document.getElementById('textoRascunho').value = "";
+    }
+</script>
 
-            const titles = {
-                'oficina': 'Oficina de Escrita (Divisor Inteligente)',
-                'bloco': 'Bloco de Notas Pessoal',
-                'calendario': 'Calendário de Frequência do Autor'
-            };
-            document.getElementById('page-title').innerText = titles[tabId];
-        }
-
-        // Contador de palavras em tempo real
-        function contarPalavras() {
-            const texto = document.getElementById('texto-original').value.trim();
-            const palavras = texto === "" ? 0 : texto.split(/\s+/).length;
-            document.getElementById('contador').innerText = `${palavras} palavras`;
-        }
-
-        // Lógica simulada do divisor inteligente por blocos
-        function dividirTexto() {
-            const texto = document.getElementById('texto-original').value.trim();
-            const container = document.getElementById('resultado-blocos');
-            container.innerHTML = '';
-
-            if (!texto) {
-                container.innerHTML = '<p style="color: #d32f2f; font-size: 0.9rem;">Insira algum texto para realizar a divisão.</p>';
-                return;
-            }
-
-            const palavras = texto.split(/\s+/);
-            const tamanhoBloco = 1000; // Média ideal escolhida (entre 800 e 1200)
-            let blocoCount = 1;
-
-            for (let i = 0; i < palavras.length; i += tamanhoBloco) {
-                const pedaco = palavras.slice(i, i + tamanhoBloco).join(' ');
-                const div = document.createElement('div');
-                div.className = 'block-item';
-                div.innerHTML = `<strong>Bloco / Capítulo ${blocoCount}</strong> (~${Math.min(tamanhoBloco, palavras.length - i)} palavras)`;
-                container.appendChild(div);
-                blocoCount++;
-            }
-        }
-
-        function limparTexto() {
-            document.getElementById('texto-original').value = '';
-            document.getElementById('resultado-blocos').innerHTML = '<p style="color: #999; font-size: 0.9rem;">Nenhum bloco gerado ainda.</p>';
-            contarPalavras();
-        }
-    </script>
 </body>
 </html>
